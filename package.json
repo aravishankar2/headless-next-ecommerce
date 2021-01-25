@@ -8,8 +8,19 @@
     "start": "next start"
   },
   "dependencies": {
+    "@apollo/react-hooks": "^4.0.0",
+    "apollo-cache-inmemory": "^1.6.6",
+    "apollo-client": "^2.6.10",
+    "apollo-link-http": "^1.5.17",
+    "bootstrap": "^4.6.0",
+    "contentful": "^8.1.7",
+    "graphql": "^15.4.0",
+    "graphql-tag": "^2.11.0",
     "next": "10.0.5",
+    "next-with-apollo": "^5.1.0",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-bootstrap": "^1.4.3",
+    "react-dom": "17.0.1",
+    "react-icons": "^4.1.0"
   }
 }
