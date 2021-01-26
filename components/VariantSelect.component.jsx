@@ -8,22 +8,17 @@ export default function VariantSelect({
   setSelected,
 }) {
   const router = useRouter();
-
-  // grabs id's from query and calls contentful function to grab entries and store them in state
-
   const handleChange = (e) => {
     setSelected(e.target.value);
   };
 
   useEffect(() => {
-    console.log("options select use effect ran");
-
     router.push(selected);
   }, [selected]);
 
   return (
     <div className="form-group h-100 w-50">
-      <label className="pb-1 text-muted">options:</label>
+      <label className="text-muted">options:</label>
       <select
         onChange={handleChange}
         className="form-control"

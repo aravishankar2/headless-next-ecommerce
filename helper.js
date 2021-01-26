@@ -4,7 +4,7 @@ export const showSFPricing = (product) => {
   if (product.soldByThe === "sf") {
     ans = product.price;
   } else if (product.soldByThe === "pc") {
-    ans = product.price / product.squareFootPerPiece;
+    ans = product.price * product.squareFootPerPiece;
   } else {
     ans = product.price / product.squareFootPerBox;
   }
@@ -12,11 +12,15 @@ export const showSFPricing = (product) => {
 };
 
 export const checkIfValsThere = (val) => {
-  if (val == 0.0) {
+  if (val == "NaN" || val == "Infinity") {
     return "N/A";
   } else if (val !== null) {
     return val;
-  } else {
+  } else if (val == null) {
     return "N/A";
   }
 };
+
+export const numberWithCommas = (x) => {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}

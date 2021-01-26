@@ -8,8 +8,7 @@ import { FaShoppingCart, FaSnowflake } from "react-icons/fa";
 import { client } from "../../contentful.client";
 import { useRouter } from "next/router";
 import VariantSelect from "../../components/VariantSelect.component";
-import { showSFPricing } from "../../helper";
-
+import { showSFPricing, numberWithCommas } from "../../helper";
 export default function Product({ data: { product }, loading, error }) {
   const router = useRouter();
   const [selected, setSelected] = useState(router.query.id);
@@ -56,6 +55,7 @@ export default function Product({ data: { product }, loading, error }) {
         <div>...loading</div>
       ) : (
         <div className="row">
+          
           {/* Image + description on the left half */}
           <div className="col-md">
             <HandleImage productImage={productImage} />
@@ -69,9 +69,7 @@ export default function Product({ data: { product }, loading, error }) {
           <div className="col-md">
             {/* Product Name */}
             <div className="d-flex justify-content-between align-items-start">
-              <h2 style={{ fontSize: "1.8em" }} className="mb-3">
-                {name}
-              </h2>
+              <h2 style={{ fontSize: "1.8em" }}>{name}</h2>
               {/* Frost Proof */}
               <span>
                 {frostProof ? (
@@ -91,25 +89,42 @@ export default function Product({ data: { product }, loading, error }) {
             <hr></hr>
 
             {/* Price Block */}
-            <div className="mt-2">
+            <div className="mb-3">
               <div className="d-flex flex-column">
-                {soldByThe === "box" ? <div  className="d-flex"><span className="price font-weight-bold">$ {showSFPricing(product)}</span><p className="pl-2 text-muted font-italic">/ sf</p></div> : null}
+                {soldByThe === "box" || soldByThe === "pc" ? (
+                  <div className="d-flex">
+                    <span className="font-weight-bold">
+                      $ {showSFPricing(product)}
+                    </span>
+                    <p className="pl-2 mb-0 text-muted font-italic">/ sf</p>
+                  </div>
+                ) : null}
                 <div className="d-flex">
                   <div className="d-flex">
-                    <span className="price font-weight-bold">$ {price}</span>
-                    <p className="pl-2 text-muted font-italic">/ {soldByThe}</p>
+                    <span className="font-weight-bold">
+                      $ {numberWithCommas(price)}
+                    </span>
+                    <p className="pl-2 mb-0 text-muted font-italic">
+                      / {soldByThe}
+                    </p>
                   </div>
 
                   <div className="d-flex pl-2">
                     {soldByThe === "sf" || soldByThe === "pc" ? (
                       <span className="d-flex">
                         ({squareFootPerPiece}
-                        <p className="pl-2 text-muted font-italic">sf / pc</p>)
+                        <p className="pl-2 mb-0 text-muted font-italic">
+                          sf / pc
+                        </p>
+                        )
                       </span>
                     ) : (
                       <span className="d-flex">
                         ({squareFootPerBox}
-                        <p className="pl-2 text-muted font-italic">sf / box</p>)
+                        <p className="pl-2 mb-0 text-muted font-italic">
+                          sf / box
+                        </p>
+                        )
                       </span>
                     )}
                   </div>
@@ -117,13 +132,22 @@ export default function Product({ data: { product }, loading, error }) {
               </div>
             </div>
 
-            <div className="d-flex mt-2 justify-content-between">
-              <button
-                className="btn btn-secondary mb-3 mt-4"
-                onClick={() => setModalShow(true)}
-              >
-                view specs <AiFillTool />
-              </button>
+            <div
+              className={`d-flex justify-content-between ${
+                variantsCollection.items.length
+                  ? "flex-row-reverse"
+                  : "flex-row"
+              }`}
+            >
+              <div className="d-flex flex-column justify-content-end mb-3">
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => setModalShow(true)}
+                >
+                  view specs <AiFillTool />
+                </button>
+              </div>
+
               <InfoModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
@@ -154,7 +178,6 @@ export default function Product({ data: { product }, loading, error }) {
                 squareFootPerBox={squareFootPerBox}
               />
               {variantsCollection.items.length !== 0 ? (
-                // <label>Options</label>
                 <VariantSelect
                   product={product}
                   name={name}
@@ -165,6 +188,8 @@ export default function Product({ data: { product }, loading, error }) {
               ) : null}
             </div>
 
+            
+
             <Calculator
               product={product}
               squareFootPerBox={squareFootPerBox}
@@ -173,7 +198,15 @@ export default function Product({ data: { product }, loading, error }) {
 
             <div className="mt-4 d-flex justify-content-between">
               <button className="btn btn-info">order a sample</button>
-              <button className="btn btn-success ml-4">
+              <button
+                className="btn btn-success ml-4 snipcart-add-item"
+                data-item-id={router.query.id}
+                data-item-image={product.productImage[0].url}
+                data-item-name={product.name + ' ' + `(by the ${product.soldByThe})`}
+                data-item-url={`http://localhost:3000/shop/${router.query.id}`}
+                data-item-price={product.price}
+                data-item-custom1-soldByThe={product.soldByThe}
+              >
                 add to cart <FaShoppingCart />
               </button>
             </div>
@@ -198,6 +231,7 @@ export default function Product({ data: { product }, loading, error }) {
           </div>
         </div>
       )}
+       
     </div>
   );
 }

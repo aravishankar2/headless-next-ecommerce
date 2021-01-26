@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, Container, Row, Col, Button } from "react-bootstrap";
-import { checkIfValsThere, round } from "../helper";
+import { checkIfValsThere, round, numberWithCommas } from "../helper";
 export function InfoModal(props) {
   return (
     <Modal
@@ -24,7 +24,14 @@ export function InfoModal(props) {
                 </div>
               </div>
             </Col>
-            <Col xs={12} sm={4} md={4}></Col>
+            <Col xs={12} sm={4} md={4}>
+            <div className=" p-3 m-1">
+                <div>weight:</div>{" "}
+                <div className="text-muted font-italic">
+                  {props.product.weight} lbs
+                </div>
+              </div>
+            </Col>
             <Col xs={12} sm={4} md={4}>
               <div className=" p-3 m-1">
                 <div>product type:</div>{" "}
@@ -63,9 +70,9 @@ export function InfoModal(props) {
               <div className=" p-3 m-1">
                 <div>finish:</div>{" "}
                 <div className="text-muted font-italic">
-                  {props.product.finish
-                    ? props.product.finish.toLowerCase()
-                    : "N/A"}
+                  {
+                     checkIfValsThere(props.product.finish)
+                   }
                 </div>
               </div>
             </Col>
@@ -119,7 +126,10 @@ export function InfoModal(props) {
               <div className="border p-3 m-1">
                 <div>price / sf:</div>{" "}
                 <div className="text-muted font-italic">
-                  ${round(props.pricePerSquareFoot)}
+                  $
+                  {checkIfValsThere(
+                    numberWithCommas(round(props.pricePerSquareFoot))
+                  )}
                 </div>
               </div>
             </Col>
@@ -128,7 +138,7 @@ export function InfoModal(props) {
               <div className="border p-3 m-1">
                 <div>price / pc: </div>
                 <div className="text-muted font-italic">
-                  ${round(checkIfValsThere(props.pricePerPiece))}
+                  ${checkIfValsThere(round(props.pricePerPiece))}
                 </div>
               </div>
             </Col>
@@ -137,7 +147,14 @@ export function InfoModal(props) {
               <div className="border p-3 m-1">
                 <div>price / box:</div>{" "}
                 <div className="text-muted font-italic">
-                  ${round(props.pricePerBox)}
+                  $
+                  {checkIfValsThere(
+                    numberWithCommas(round(props.pricePerBox))
+                  ) == 0
+                    ? "N/A"
+                    : checkIfValsThere(
+                        numberWithCommas(round(props.pricePerBox))
+                      )}
                 </div>
               </div>
             </Col>
@@ -148,7 +165,7 @@ export function InfoModal(props) {
               <div className="border p-3 m-1">
                 <div>sf / pc:</div>{" "}
                 <div className="text-muted font-italic">
-                  {props.product.squareFootPerPiece}
+                  {checkIfValsThere(props.product.squareFootPerPiece)}
                 </div>
               </div>
             </Col>
@@ -157,7 +174,7 @@ export function InfoModal(props) {
               <div className="border p-3 m-1">
                 <div>sf / box: </div>
                 <div className="text-muted font-italic">
-                  {props.squareFootPerBox}
+                  {checkIfValsThere(props.squareFootPerBox)}
                 </div>
               </div>
             </Col>

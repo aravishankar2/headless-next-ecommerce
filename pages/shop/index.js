@@ -1,4 +1,4 @@
-import { GET_ALL_PRODUCTS } from "../../queries/products";
+import { GET_ALL_PRODUCTS } from "../../apollo/queries/products";
 import styles from "../../styles/Home.module.css";
 import ProductCard from "../../components/ProductCard.component";
 export default function Shop({
@@ -8,14 +8,14 @@ export default function Shop({
   loading,
 }) {
   return (
-    <div onClick={() => console.log(products)} className={styles.container}>
+    <div onClick={() => console.log(products)} className="container">
       <div className="grid-container">
         {loading ? (
           <div>...loading</div>
         ) : (
           products
             .sort((a, b) => (a.name === b.name ? 0 : a.name > b.name ? 1 : -1))
-            .map((product, i) => <ProductCard i={i} product={product} />)
+            .map((product, i) => <ProductCard key={i} product={product} />)
         )}
       </div>
     </div>

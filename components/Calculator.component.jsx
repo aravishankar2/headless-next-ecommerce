@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {checkIfValsThere} from '../helper'
 export function Calculator({ product, squareFootPerBox, squareFootPerPiece }) {
   let [totalSF, setTotalSF] = useState(0);
   let [sfNeeded, setSfNeeded] = useState(0);
@@ -82,19 +83,19 @@ export function Calculator({ product, squareFootPerBox, squareFootPerPiece }) {
             <div className="row h-100">
               <div className="col-4 d-flex justify-content-center align-items-center">
                 <div className="text-center">
-                  <h3>{parseFloat(totalSF).toFixed(2)}</h3>
+                  <h3>{checkIfValsThere(parseFloat(totalSF).toFixed(2))}</h3>
                   <span className="text-muted">total sf</span>
                 </div>
               </div>
               <div className="col-4 d-flex justify-content-center align-items-center">
                 <div className="text-center">
-                  <h3>{parseFloat(totalPCS).toFixed()}</h3>
+                  <h3>{checkIfValsThere(parseFloat(totalPCS).toFixed())}</h3>
                   <span className="text-muted">total pcs</span>
                 </div>
               </div>
               <div className="col-4 d-flex justify-content-center align-items-center">
                 <div className="text-center">
-                  <h3>{parseFloat(boxesNeeded).toFixed()}</h3>
+                  <h3>{checkIfValsThere(parseFloat(boxesNeeded).toFixed())}</h3>
                   <span className="text-muted">boxes needed</span>
                 </div>
               </div>

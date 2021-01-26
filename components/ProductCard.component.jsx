@@ -1,13 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { showSFPricing } from "../helper";
-const ProductCard = ({ product, i }) => {
+const ProductCard = ({ product }) => {
   return (
-    <Link key={i} href={`/shop/${product.sys.id}`}>
+    <Link href={`/shop/${product.sys.id}`}>
       <div
         className="card grid-item"
         style={{
-          boxShasdow:
+          borderRadius: '0',
+          boxShadow:
             "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
         }}
       >
@@ -19,12 +20,12 @@ const ProductCard = ({ product, i }) => {
           height={200}
         />
         <span
-          className="mt-2"
+          className="mt-1"
           style={{ fontSize: "0.9rem", lineHeight: "1em" }}
         >
           {product.name}
         </span>
-        <span className="mt-2 text-muted" style={{ fontSize: "0.8rem" }}>
+        <span className="text-muted" style={{ fontSize: "0.8rem" }}>
           ${showSFPricing(product)} / sf
         </span>
       </div>
