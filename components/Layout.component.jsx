@@ -8,11 +8,11 @@ const Layout = (props) => (
     <Head>
       <title>E-Commerce</title>
       <link rel="icon" href="/favicon.ico" />
-      <link rel="preconnect" href="https://app.snipcart.com" />
-      <link rel="preconnect" href="https://cdn.snipcart.com" />
+      {/* <link rel="preconnect" href="https://app.snipcart.com" />
+      <link rel="preconnect" href="https://cdn.snipcart.com" /> */}
       <link
         rel="stylesheet"
-        href="https://cdn.snipcart.com/themes/v3.0.21/default/snipcart.css"
+        href="https://cdn.snipcart.com/themes/v3.0.4/default/snipcart.css"
       />
     </Head>
     <Nav />
@@ -30,14 +30,14 @@ const Layout = (props) => (
         <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
       </a>
     </footer>
-    <script
-      async
-      src="https://cdn.snipcart.com/themes/v3.0.21/default/snipcart.js"
-    />
+    
     <div
       hidden
       id="snipcart"
-      data-api-key={process.env.NEXT_SNIPCART_API_KEY}
+      data-api-key={process.env.NEXT_PUBLIC_SNIPCART_API_KEY}
+    />
+    <script
+      src="https://cdn.snipcart.com/themes/v3.0.4/default/snipcart.js"
     />
   </div>
 );

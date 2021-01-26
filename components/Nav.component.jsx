@@ -4,7 +4,7 @@ const Nav = () => (
   <>
     <Navbar bg="light" expand="sm">
       <div className="container d-flex justify-content-between align-items-center">
-        <Navbar.Brand href="#home">E - Commerce</Navbar.Brand>
+        <Navbar.Brand href="/shop">E - Commerce</Navbar.Brand>
         <div>
           <a
             className="snipcart-checkout snipcart-summary"

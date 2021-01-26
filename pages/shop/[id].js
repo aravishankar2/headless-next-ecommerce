@@ -205,7 +205,7 @@ export default function Product({ data: { product }, loading, error }) {
                 data-item-name={product.name + ' ' + `(by the ${product.soldByThe})`}
                 data-item-url={`http://localhost:3000/shop/${router.query.id}`}
                 data-item-price={product.price}
-                data-item-custom1-soldByThe={product.soldByThe}
+                data-item-custom1-soldbythe={product.soldByThe}
               >
                 add to cart <FaShoppingCart />
               </button>
