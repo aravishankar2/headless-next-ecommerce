@@ -1,7 +1,7 @@
 module.exports = {
   images: {
     loader: "cloudinary",
-    path: "http://res.cloudinary.com/surface-group",
+    path: "https://res.cloudinary.com/surface-group",
     domains: ["res.cloudinary.com"],
   },
   target: 'serverless',
