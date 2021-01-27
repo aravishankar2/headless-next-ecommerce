@@ -1,6 +1,5 @@
 module.exports = {
   images: {
-    loader: "cloudinary",
     path: "http://res.cloudinary.com/surface-group",
     domains: ["res.cloudinary.com"],
   },
