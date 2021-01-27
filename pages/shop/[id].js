@@ -55,7 +55,6 @@ export default function Product({ data: { product }, loading, error }) {
         <div>...loading</div>
       ) : (
         <div className="row">
-          
           {/* Image + description on the left half */}
           <div className="col-md">
             <HandleImage productImage={productImage} />
@@ -188,31 +187,16 @@ export default function Product({ data: { product }, loading, error }) {
               ) : null}
             </div>
 
-            
-
             <Calculator
+              setQty={setQty}
               product={product}
               squareFootPerBox={squareFootPerBox}
               squareFootPerPiece={squareFootPerPiece}
             />
 
             <div className="mt-4 d-flex justify-content-between">
-              <button className="btn btn-info">order a sample</button>
-              <button
-                className="btn btn-success ml-4 snipcart-add-item"
-                data-item-id={router.query.id}
-                data-item-image={product.productImage[0].url}
-                data-item-name={product.name + ' ' + `(by the ${product.soldByThe})`}
-                data-item-url={`http://localhost:3000/shop/${router.query.id}`}
-                data-item-price={product.price}
-                data-item-custom1-soldbythe={product.soldByThe}
-              >
-                add to cart <FaShoppingCart />
-              </button>
-            </div>
-
-            <div className="w-100 d-flex justify-content-center">
-              <div className="col-4 mt-4 d-flex border justify-content-between align-items-center p-0">
+              <button className=" btn btn-info">order a sample</button>
+              <div className=" d-flex border justify-content-between align-items-center p-0">
                 <button
                   className="btn mr-0 ml-0"
                   onClick={() => setQty(qty - 1)}
@@ -227,11 +211,25 @@ export default function Product({ data: { product }, loading, error }) {
                   <AiOutlinePlus />
                 </button>
               </div>
+
+              <button
+                className="btn btn-success snipcart-add-item "
+                data-item-id={router.query.id}
+                data-item-image={product.productImage[0].url}
+                data-item-name={product.name}
+                data-item-description={`sold by the ${product.soldByThe}`}
+                data-item-url={`http://localhost:3000/shop/${router.query.id}`}
+                data-item-price={product.price}
+                data-item-quantity={qty}
+              >
+                add to cart <FaShoppingCart />
+              </button>
             </div>
+
+            
           </div>
         </div>
       )}
-       
     </div>
   );
 }

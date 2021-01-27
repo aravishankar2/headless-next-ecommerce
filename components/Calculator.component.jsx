@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
-import {checkIfValsThere} from '../helper'
-export function Calculator({ product, squareFootPerBox, squareFootPerPiece }) {
-  let [totalSF, setTotalSF] = useState(0);
+import { checkIfValsThere } from "../helper";
+export function Calculator({
+  product,
+  squareFootPerBox,
+  squareFootPerPiece,
+  setQty,
+}) {
   let [sfNeeded, setSfNeeded] = useState(0);
+  let [totalSF, setTotalSF] = useState(0);
   let [totalPCS, setTotalPCS] = useState(0);
   let [boxesNeeded, setBoxesNeeded] = useState(0);
   let [overage, setOverage] = useState(0.15);
@@ -12,7 +17,7 @@ export function Calculator({ product, squareFootPerBox, squareFootPerPiece }) {
     setTotalSF(
       parseFloat(
         parseInt(sfNeeded).toFixed(2) * parseFloat(overage) + parseInt(sfNeeded)
-      ).toFixed(2)
+      )
     );
   };
 
@@ -43,10 +48,7 @@ export function Calculator({ product, squareFootPerBox, squareFootPerPiece }) {
   }, [sfNeeded, totalSF, totalPCS, overage]);
 
   return (
-    <div
-      className="container-fluid d-flex flex-column align-items-between justify-content-between border"
-      style={{ height: "200px" }}
-    >
+    <div className="container-fluid d-flex flex-column align-items-between justify-content-between border">
       <div className="h-50 row d-flex align-items-between justify-content-between">
         <div className="container-fluid h-100">
           <div className="row h-100">
@@ -80,10 +82,10 @@ export function Calculator({ product, squareFootPerBox, squareFootPerPiece }) {
         {/* Three Columns: totalSF, totalPCS, boxesNeeded */}
         <div className="h-100">
           <div className="container h-100">
-            <div className="row h-100">
+            <div className="row h-100 mt-4">
               <div className="col-4 d-flex justify-content-center align-items-center">
                 <div className="text-center">
-                  <h3>{checkIfValsThere(parseFloat(totalSF).toFixed(2))}</h3>
+                  <h3>{checkIfValsThere(parseFloat(totalSF).toFixed())}</h3>
                   <span className="text-muted">total sf</span>
                 </div>
               </div>
@@ -102,6 +104,32 @@ export function Calculator({ product, squareFootPerBox, squareFootPerPiece }) {
             </div>
           </div>
         </div>
+      </div>
+      <div className="p-0 d-flex justify-content-center">
+        <button
+          disabled={
+            (product.soldByThe === "box" && boxesNeeded === 0) ||
+            boxesNeeded === "NaN"
+              ? true
+              : (product.soldByThe === "pc" && totalPCS === 0) ||
+                totalPCS === "NaN"
+              ? true
+              : (product.soldByThe === "sf" && totalSF === 0) ||
+                totalSF === "NaN"
+              ? true
+              : false
+          }
+          onClick={
+            product.soldByThe === "box"
+              ? () => setQty(Math.round(boxesNeeded))
+              : product.soldByThe === "pc"
+              ? () => setQty(Math.round(totalPCS))
+              : () => setQty(Math.round(totalSF))
+          }
+          className="btn btn-primary mb-4"
+        >
+          Update Quantity
+        </button>
       </div>
     </div>
   );

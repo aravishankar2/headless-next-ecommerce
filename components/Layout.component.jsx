@@ -12,7 +12,7 @@ const Layout = (props) => (
       <link rel="preconnect" href="https://cdn.snipcart.com" /> */}
       <link
         rel="stylesheet"
-        href="https://cdn.snipcart.com/themes/v3.0.4/default/snipcart.css"
+        href="https://cdn.snipcart.com/themes/v3.0.28/default/snipcart.css"
       />
     </Head>
     <Nav />
@@ -37,7 +37,7 @@ const Layout = (props) => (
       data-api-key={process.env.NEXT_PUBLIC_SNIPCART_API_KEY}
     />
     <script
-      src="https://cdn.snipcart.com/themes/v3.0.4/default/snipcart.js"
+      src="https://cdn.snipcart.com/themes/v3.0.28/default/snipcart.js"
     />
   </div>
 );
