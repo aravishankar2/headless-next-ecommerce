@@ -8,8 +8,7 @@ const Layout = (props) => (
     <Head>
       <title>E-Commerce</title>
       <link rel="icon" href="/favicon.ico" />
-      {/* <link rel="preconnect" href="https://app.snipcart.com" />
-      <link rel="preconnect" href="https://cdn.snipcart.com" /> */}
+
       <link
         rel="stylesheet"
         href="https://cdn.snipcart.com/themes/v3.0.28/default/snipcart.css"
@@ -21,24 +20,22 @@ const Layout = (props) => (
     </div>
 
     <footer className={styles.footer}>
-      <a
+      {/* <a
         href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
         target="_blank"
         rel="noopener noreferrer"
       >
         Powered by{" "}
         <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-      </a>
+      </a> */}
     </footer>
-    
+
     <div
       hidden
       id="snipcart"
       data-api-key={process.env.NEXT_PUBLIC_SNIPCART_API_KEY}
     />
-    <script
-      src="https://cdn.snipcart.com/themes/v3.0.28/default/snipcart.js"
-    />
+    <script src="https://cdn.snipcart.com/themes/v3.0.28/default/snipcart.js" />
   </div>
 );
 

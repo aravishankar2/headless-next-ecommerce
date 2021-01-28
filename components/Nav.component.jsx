@@ -8,12 +8,14 @@ const Nav = () => (
         <div>
           <a
             className="snipcart-checkout snipcart-summary"
-            href="#"
-            style={{ textDecoration: "none" }}
+            // href="#"
+            // style={{ textDecoration: "none" }}
           >
             <div className="d-flex justify-content-between align-items-center">
+            <small className="snipcart-items-count text-muted "></small>
             <span className="mr-2"><FaShoppingCart /></span>{" "}
             <small className="snipcart-total-price">$0.00</small>
+
             </div>
           </a>
         </div>
