@@ -8,11 +8,12 @@ export default function Shop({
   },
   loading,
 }) {
+
   const [allProducts] = useState(products);
   const [limit, setLimit] = useState(20);
 
   return (
-    <div onClick={() => console.log(allProducts)} className="container">
+    <div className="container">
       <div className="grid-container">
         {loading ? (
           <div>...loading</div>

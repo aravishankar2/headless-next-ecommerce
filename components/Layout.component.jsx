@@ -6,36 +6,22 @@ import styles from "../styles/Home.module.css";
 const Layout = (props) => (
   <div>
     <Head>
-      <title>E-Commerce</title>
-      <link rel="icon" href="/favicon.ico" />
-
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+      <script
+        src="https://cdn.snipcart.com/scripts/2.0/snipcart.js"
+        data-api-key={process.env.NEXT_PUBLIC_SNIPCART_API_KEY}
+        id="snipcart"
+      ></script>
       <link
+        href="https://cdn.snipcart.com/themes/2.0/base/snipcart.min.css"
         rel="stylesheet"
-        href="https://cdn.snipcart.com/themes/v3.0.28/default/snipcart.css"
+        type="text/css"
       />
     </Head>
     <Nav />
     <div>
       <main>{props.children}</main>
     </div>
-
-    <footer className={styles.footer}>
-      {/* <a
-        href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Powered by{" "}
-        <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-      </a> */}
-    </footer>
-
-    <div
-      hidden
-      id="snipcart"
-      data-api-key={process.env.NEXT_PUBLIC_SNIPCART_API_KEY}
-    />
-    <script src="https://cdn.snipcart.com/themes/v3.0.28/default/snipcart.js" />
   </div>
 );
 

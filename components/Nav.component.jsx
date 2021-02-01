@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import netlifyAuth from "../netlifyAuth";
 import { Navbar } from "react-bootstrap";
 import { FaShoppingCart } from "react-icons/fa";
+
 const Nav = () => {
   let [loggedIn, setLoggedIn] = useState(netlifyAuth.isAuthenticated);
   let [user, setUser] = useState(null);
