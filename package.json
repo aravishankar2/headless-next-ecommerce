@@ -17,6 +17,7 @@
     "contentful": "^8.1.7",
     "graphql": "^15.4.0",
     "graphql-tag": "^2.11.0",
+    "netlify-identity-widget": "^1.9.1",
     "next": "10.0.5",
     "next-with-apollo": "^5.1.0",
     "react": "17.0.1",
