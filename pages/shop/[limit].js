@@ -1,8 +1,8 @@
 import { GET_ALL_PRODUCTS } from "../../apollo/queries/products";
 import { useState, useEffect } from "react";
-import styles from "../../styles/Home.module.css";
 import ProductCard from "../../components/ProductCard.component";
 import { useRouter } from "next/router";
+import FilterBar from "../../components/FilterBar.component";
 
 export default function Shop({
   data: {
@@ -15,7 +15,10 @@ export default function Shop({
   const [allProducts] = useState(products);
 
   return (
-    <div className="container" onClick={() => console.log(router.query)}>
+    <div className="d-flex" onClick={() => console.log(router.query)}>
+      <div>
+        <FilterBar />
+      </div>
       <div className="grid-container">
         {loading ? (
           <div>...loading</div>

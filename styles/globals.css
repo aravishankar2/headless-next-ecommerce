@@ -16,7 +16,7 @@ a {
 }
 
 .grid-container {
-  margin: 20px auto;
+  /* margin: 20px auto; */
   display: grid;
   width: 100%;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -55,4 +55,10 @@ a {
   z-index: 10;
   cursor: pointer;
   user-select: none;
+}
+
+/* overriding react-pro-sidebar styles to hide completely */
+.pro-sidebar.collapsed {
+  width: 0px;
+  min-width: 0px;
 }

@@ -1,7 +1,5 @@
 import Nav from "./Nav.component";
-// import Footer from './Footer'
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
 
 const Layout = (props) => (
   <div>

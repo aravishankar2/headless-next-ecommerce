@@ -104,6 +104,7 @@ export function Calculator({
             </div>
           </div>
         </div>
+        
       </div>
       <div className="p-0 d-flex justify-content-center">
         <button
