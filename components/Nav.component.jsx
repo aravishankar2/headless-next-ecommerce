@@ -8,15 +8,11 @@ const Nav = () => {
     <>
       <Navbar bg="light" expand="sm">
         <div className="container d-flex justify-content-between align-items-center">
-          <Navbar.Brand href="/shop">E - Commerce</Navbar.Brand>
-          {/*  */}
-          <Login />
+          <Navbar.Brand href="/shop/20">E - Commerce</Navbar.Brand>
+
+          {/* <Login /> */}
           <div>
-            <a
-              className="snipcart-checkout snipcart-summary"
-              // href="#"
-              // style={{ textDecoration: "none" }}
-            >
+            <a className="snipcart-checkout snipcart-summary">
               <div className="d-flex justify-content-between align-items-center">
                 {/* <small className="snipcart-items-count text-muted "></small> */}
                 <span className="mr-2">

@@ -6,13 +6,6 @@ export const GET_PRODUCT = gql`
       application
       color
       colorVariation
-      categoryCollection {
-        items {
-          sys {
-            id
-          }
-        }
-      }
       description
       finish
       frostProof

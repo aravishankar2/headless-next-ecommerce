@@ -3,11 +3,11 @@ import Image from "next/image";
 import { showSFPricing } from "../helper";
 const ProductCard = ({ product }) => {
   return (
-    <Link href={`/shop/${product.sys.id}`}>
+    <Link href={`/shop/product/${product.sys.id}`}>
       <div
         className="card grid-item"
         style={{
-          borderRadius: '0',
+          borderRadius: "0",
           boxShadow:
             "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
         }}
