@@ -1,7 +1,9 @@
 import { ProSidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
 import { FaHeart, FaGem, FaBoxOpen } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from 'next/router'
+import Link  from 'next/link'
 
 // Create 3 checkboxes to filter by items sold per
 // Create a dropdown to filter by material
@@ -14,7 +16,9 @@ import { useState } from "react";
 // Create a checkbox to get only frost proof items
 // Create a dropdown for color variation
 const FilterBar = () => {
+  const router = useRouter()
   const [collapsed, setCollapsed] = useState(false);
+
   return (
     <ProSidebar collapsed={collapsed}>
         
@@ -22,14 +26,15 @@ const FilterBar = () => {
           
         {/* <MenuItem icon={<FaGem />}>Filter</MenuItem> */}
         <SubMenu title="Sold By The" icon={<FaBoxOpen />}>
-          <MenuItem>Box</MenuItem>
-          <MenuItem>Piece</MenuItem>
-          <MenuItem>Square Foot</MenuItem>
+          <MenuItem><Link href="/shop/20?soldByThe=box">Box</Link></MenuItem>
+          <MenuItem><Link href="/shop/20?soldByThe=pc">Piece</Link></MenuItem>
+          <MenuItem><Link href="/shop/20?soldByThe=sf">Square Foot</Link></MenuItem>
+
         </SubMenu>
         <SubMenu title="Material" icon={<FaBoxOpen />}>
-          <MenuItem>Marble</MenuItem>
-          <MenuItem>Porcelain</MenuItem>
-          <MenuItem>Ceramic</MenuItem>
+          <MenuItem><Link href="/shop/20?material=Marble">Marble</Link></MenuItem>
+          <MenuItem><Link href="/shop/20?material=Porcelain">Porcelain</Link></MenuItem>
+          <MenuItem><Link href="/shop/20?material=Ceramic">Ceramic</Link></MenuItem>
         </SubMenu>
       </Menu>
     </ProSidebar>

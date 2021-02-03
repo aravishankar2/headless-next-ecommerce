@@ -1,7 +1,6 @@
 import { GET_ALL_PRODUCTS } from "../../apollo/queries/products";
 import { useState, useEffect } from "react";
 import ProductCard from "../../components/ProductCard.component";
-import { useRouter } from "next/router";
 import FilterBar from "../../components/FilterBar.component";
 
 export default function Shop({
@@ -10,12 +9,12 @@ export default function Shop({
   },
   loading,
 }) {
-  const router = useRouter();
-
-  const [allProducts] = useState(products);
-
+  const [allProducts, setAllProducts] = useState(products);
+  useEffect(() => {
+    setAllProducts(products);
+  }, [products]);
   return (
-    <div className="d-flex" onClick={() => console.log(router.query)}>
+    <div className="d-flex">
       <div>
         <FilterBar />
       </div>
@@ -35,7 +34,7 @@ export default function Shop({
 Shop.getInitialProps = async (ctx) => {
   const {
     apolloClient,
-    query: { limit, material, tags_contains_some },
+    query: { limit, material, tags_contains_some, soldByThe },
   } = ctx;
   const { data, loading, error } = await apolloClient.query({
     query: GET_ALL_PRODUCTS,
@@ -43,6 +42,7 @@ Shop.getInitialProps = async (ctx) => {
       limit: parseInt(limit),
       material: material,
       tags_contains_some: tags_contains_some,
+      soldByThe: soldByThe,
     },
   });
 
