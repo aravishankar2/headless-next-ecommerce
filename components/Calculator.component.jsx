@@ -44,7 +44,8 @@ export function Calculator({
     // pieces per sf * total sf = total pieces
     setTotalPCS(parseFloat((1 / squareFootPerPiece) * totalSF));
     // total pieces / pieces per box = boxes needed
-    setBoxesNeeded(parseFloat(totalPCS / product.piecesPerBox).toFixed());
+    //IMPORTANT: This relys on a field that is potentially not there. You may need to recalc using different values
+    setBoxesNeeded(parseFloat(sfNeeded / product.squareFootPerBox).toFixed());
   }, [sfNeeded, totalSF, totalPCS, overage]);
 
   return (
@@ -109,13 +110,13 @@ export function Calculator({
       <div className="p-0 d-flex justify-content-center">
         <button
           disabled={
-            (product.soldByThe === "box" && boxesNeeded === 0) ||
+            (product.soldByThe === "box" && boxesNeeded == 0) ||
             boxesNeeded === "NaN"
               ? true
-              : (product.soldByThe === "pc" && totalPCS === 0) ||
+              : (product.soldByThe === "pc" && totalPCS == 0) ||
                 totalPCS === "NaN"
               ? true
-              : (product.soldByThe === "sf" && totalSF === 0) ||
+              : (product.soldByThe === "sf" && totalSF == 0) ||
                 totalSF === "NaN"
               ? true
               : false

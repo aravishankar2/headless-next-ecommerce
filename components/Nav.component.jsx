@@ -1,14 +1,35 @@
-import { useState, useEffect } from "react";
+import { useContext } from "react";
 import netlifyAuth from "../netlifyAuth";
 import { Navbar } from "react-bootstrap";
 import { FaShoppingCart } from "react-icons/fa";
 import { Login } from "./Login.component";
+import { FilterContext } from "../context/filterbar.context";
+import { Form } from "react-bootstrap";
+
 const Nav = () => {
+  const { state, dispatch } = useContext(FilterContext);
+
   return (
     <>
       <Navbar bg="light" expand="sm">
         <div className="container d-flex justify-content-between align-items-center">
-          <Navbar.Brand href="/shop/20">E - Commerce</Navbar.Brand>
+          <div className="d-flex align-items-center">
+            <Navbar.Brand href="/shop/">E - Commerce</Navbar.Brand>
+            <Form>
+              <Form.Check
+                onChange={() => {
+                  dispatch({
+                    type: "TOGGLE_OPEN",
+                    payload: !state.opened,
+                  });
+                }}
+                checked={state.opened}
+                type="switch"
+                id="custom-switch"
+                label={state.opened ? "hide filter bar" : "show filter bar"}
+              />
+            </Form>
+          </div>
 
           {/* <Login /> */}
           <div>
