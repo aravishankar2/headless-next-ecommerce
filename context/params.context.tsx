@@ -1,23 +1,19 @@
-import { useState, useEffect, useReducer, createContext, useRef } from "react";
+import { useReducer, createContext } from "react";
 import { params } from "./reducer/params";
-import { useRouter } from "next/router";
-// initial state
+import { IProps } from "../interfaces/iProps";
 const initialState = {
   limit: 100,
   material: "",
   soldByThe: "",
   frostProof: true,
-  notFrostProof: true
+  notFrostProof: true,
+  order: 'name_ASC'
 };
-
-// create context
 const ParamsContext = createContext({});
-
-// context provider
-const ParamsProvider = ({ children }) => {
+const ParamsProvider = ({ children }: IProps) => {
   const [state, dispatch] = useReducer(params, initialState);
   const value = { state, dispatch };
-  
+
   return (
     <ParamsContext.Provider value={value}>{children}</ParamsContext.Provider>
   );

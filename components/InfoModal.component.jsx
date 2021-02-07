@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, Container, Row, Col, Button } from "react-bootstrap";
-import { checkIfValsThere, round, numberWithCommas } from "../helper";
+import { checkIfValsThere, round, numberWithCommas } from "../helper.ts";
 export function InfoModal(props) {
   return (
     <Modal

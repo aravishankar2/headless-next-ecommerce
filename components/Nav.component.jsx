@@ -1,14 +1,10 @@
 import { useContext } from "react";
-import netlifyAuth from "../netlifyAuth";
 import { Navbar } from "react-bootstrap";
 import { FaShoppingCart } from "react-icons/fa";
-import { Login } from "./Login.component";
-import { FilterContext } from "../context/filterbar.context";
+import { FilterContext } from "../context/filterbar.context.tsx";
 import { Form } from "react-bootstrap";
-
 const Nav = () => {
   const { state, dispatch } = useContext(FilterContext);
-
   return (
     <>
       <Navbar bg="light" expand="sm">
@@ -32,14 +28,21 @@ const Nav = () => {
           </div>
 
           {/* <Login /> */}
-          <div>
+          <div
+            onClick={() =>
+              dispatch({
+                type: "TOGGLE_OPEN",
+                payload: false,
+              })
+            }
+          >
             <a className="snipcart-checkout snipcart-summary">
               <div className="d-flex justify-content-between align-items-center">
                 {/* <small className="snipcart-items-count text-muted "></small> */}
                 <span className="mr-2">
                   <FaShoppingCart />
                 </span>{" "}
-                <small className="snipcart-total-price">$0.00</small>
+                <small className="snipcart-items-count">0</small>
               </div>
             </a>
           </div>

@@ -8,6 +8,8 @@ export function params(state, action) {
         return { ...state, limit: action.payload };
       case "FROST_PROOF":
         return { ...state, frostProof: action.payload};
+      case "ORDER":
+        return { ...state, order: action.payload};
       default:
         return state;
     }

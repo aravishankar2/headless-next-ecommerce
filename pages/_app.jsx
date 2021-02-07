@@ -4,8 +4,8 @@ import App from "next/app";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/globals.css";
 import Layout from "../components/Layout.component";
-import { ParamsProvider } from "../context/params.context";
-import { FilterBarProvider } from "../context/filterbar.context";
+import { ParamsProvider } from "../context/params.context.tsx";
+import { FilterBarProvider } from "../context/filterbar.context.tsx";
 
 class MyApp extends App {
   render() {

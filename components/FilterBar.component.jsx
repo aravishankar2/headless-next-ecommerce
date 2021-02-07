@@ -1,12 +1,11 @@
 import { ProSidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
-import { FaHeart, FaGem, FaBoxOpen, FaThLarge, FaSnowflake } from "react-icons/fa";
-import { useState, useEffect, useContext, useRef } from "react";
-import Link from "next/link";
-import { FilterContext } from "../context/filterbar.context";
-import { ParamsContext } from "../context/params.context";
-import { Form, Container } from "react-bootstrap";
-import {useRouter} from 'next/router'
+import { FaBoxOpen, FaThLarge, FaSnowflake, FaFilter } from "react-icons/fa";
+import { useContext } from "react";
+import { FilterContext } from "../context/filterbar.context.tsx";
+import { ParamsContext } from "../context/params.context.tsx";
+import { Form } from "react-bootstrap";
+import { useRouter } from "next/router";
 // Create a dropdown to filter by items sold per (Done)
 // Create a dropdown to filter by material (Done)
 // Create a dropdown to filter by size (change contentful schema)
@@ -18,7 +17,7 @@ import {useRouter} from 'next/router'
 // Create a checkbox to get only frost proof items (having difficulty showing ALL the products, not just ones that are either frost proof or not frost proof..may need to sort on the client side but am really trying to avoid doing this.)
 // Create a dropdown for color variation
 const FilterBar = () => {
-  const router = useRouter()
+  const router = useRouter();
   const {
     state: { opened },
   } = useContext(FilterContext);
@@ -153,24 +152,44 @@ const FilterBar = () => {
           </MenuItem>
         </SubMenu>
 
-       <SubMenu title="Frost Proof" icon={<FaSnowflake />}>
-       <MenuItem>
-         
-         {/* <Form.Group controlId="formBasicCheckbox"> */}
-           <Form.Check
-             onChange={() => {
-               dispatch({
-                 type: "FROST_PROOF",
-                 payload: !state.frostProof,
-               });
-             }}
-             type="checkbox"
-             label="show frost proof"
-           />
-         {/* </Form.Group> */}
-       
-     </MenuItem>
-       </SubMenu>
+        <SubMenu title="Frost Proof" icon={<FaSnowflake />}>
+          <MenuItem>
+            {/* <Form.Group controlId="formBasicCheckbox"> */}
+            <Form.Check
+              onChange={() => {
+                dispatch({
+                  type: "FROST_PROOF",
+                  payload: !state.frostProof,
+                });
+              }}
+              type="checkbox"
+              label="show frost proof"
+            />
+            {/* </Form.Group> */}
+          </MenuItem>
+        </SubMenu>
+        <SubMenu title="Sort By:" icon={<FaFilter />}>
+        <MenuItem
+            onClick={() => {
+              dispatch({
+                type: "ORDER",
+                payload: "name_ASC",
+              });
+            }}
+          >
+            Name [ASC]
+          </MenuItem>
+        <MenuItem
+            onClick={() => {
+              dispatch({
+                type: "ORDER",
+                payload: "name_DESC",
+              });
+            }}
+          >
+            Name [DESC]
+          </MenuItem>
+        </SubMenu>
       </Menu>
     </ProSidebar>
   );

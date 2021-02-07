@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { showSFPricing } from "../helper";
+import { showSFPricing } from "../helper.ts";
 const ProductCard = ({ product }) => {
   return (
     <div>

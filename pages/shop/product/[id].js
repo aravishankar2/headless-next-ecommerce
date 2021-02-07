@@ -8,7 +8,7 @@ import { FaShoppingCart, FaSnowflake } from "react-icons/fa";
 import { client } from "../../../contentful.client";
 import { useRouter } from "next/router";
 import VariantSelect from "../../../components/VariantSelect.component";
-import { showSFPricing, numberWithCommas } from "../../../helper";
+import { showSFPricing, numberWithCommas } from "../../../helper.ts";
 export default function Product({ data: { product }, loading, error }) {
   const router = useRouter();
   const [selected, setSelected] = useState(router.query.id);

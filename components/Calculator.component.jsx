@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { checkIfValsThere } from "../helper";
+import { checkIfValsThere } from "../helper.ts";
 export function Calculator({
   product,
   squareFootPerBox,
