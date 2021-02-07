@@ -2,14 +2,16 @@ import { useReducer, createContext } from "react";
 import { params } from "./reducer/params";
 import { IProps } from "../interfaces/iProps";
 const initialState = {
-  limit: 100,
+  limit: 20,
   material: "",
   soldByThe: "",
+  finish: "",
   frostProof: true,
   notFrostProof: true,
-  order: 'name_ASC'
+  order: ""
 };
 const ParamsContext = createContext({});
+
 const ParamsProvider = ({ children }: IProps) => {
   const [state, dispatch] = useReducer(params, initialState);
   const value = { state, dispatch };

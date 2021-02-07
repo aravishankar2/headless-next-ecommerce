@@ -3,7 +3,7 @@ import { filterbar } from "./reducer/filterbar";
 import { IProps } from "../interfaces/iProps";
 
 const initialState = {
-  opened: false,
+  opened: true,
 };
 
 const FilterContext = createContext({});

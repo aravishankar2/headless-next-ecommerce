@@ -6,17 +6,18 @@ import { ParamsContext } from "../../context/params.context.tsx";
 import { useRouter } from "next/router";
 export default function Shop({
   data: {
-    productCollection: { items: products },
+    productCollection: { total, items: products, },
   },
   loading,
 }) {
   const [allProducts, setAllProducts] = useState(products);
   const isInitialMount = useRef(true);
-  const { state } = useContext(ParamsContext);
+
+  const { state, dispatch } = useContext(ParamsContext);
   const router = useRouter();
   useEffect(() => {
     setAllProducts(products);
-  }, [products]);
+  }, [products, state.limit]);
 
   useEffect(() => {
     if (isInitialMount.current) {
@@ -24,18 +25,21 @@ export default function Shop({
     } else {
       router.push(
         `/shop?${state.material ? "&material=" + state.material : ""}${
-          state.soldByThe ? "&soldByThe=" + state.soldByThe : ""
-        }${state.limit ? "&limit=" + state.limit : ""}${
-          !state.frostProof ? "&frostProof=" + state.frostProof : ""
-        }${state.order ? "&order=" + state.order : ""}`
+          state.finish ? "&finish=" + state.finish : ""
+        }${state.soldByThe ? "&soldByThe=" + state.soldByThe : ""}${
+          state.limit ? "&limit=" + state.limit : ""
+        }${!state.frostProof ? "&frostProof=" + state.frostProof : ""}${
+          state.order ? "&order=" + state.order : ""
+        }`
       );
     }
-  }, [state, state.frostProof]);
+  }, [state, state.frostProof, state.limit]);
 
   return (
+    <>
     <div className="d-flex">
       <div>
-        <FilterBar />
+        <FilterBar total={total} setAllProducts={setAllProducts} />
       </div>
       <div className="grid-container">
         {loading ? (
@@ -47,15 +51,28 @@ export default function Shop({
             <ProductCard key={i} product={product} />
           ))
         )}
+           
       </div>
+
     </div>
+
+    </>
   );
 }
 
 Shop.getInitialProps = async (ctx) => {
   const {
     apolloClient,
-    query: { limit, material, tags_contains_some, soldByThe, frostProof, frostProof_not, order },
+    query: {
+      limit,
+      material,
+      tags_contains_some,
+      soldByThe,
+      frostProof,
+      frostProof_not,
+      order,
+      finish
+    },
   } = ctx;
   const { data, loading, error } = await apolloClient.query({
     query: GET_ALL_PRODUCTS,
@@ -66,7 +83,8 @@ Shop.getInitialProps = async (ctx) => {
       tags_contains_some: tags_contains_some,
       frostProof: Boolean(frostProof),
       frostProof_not: Boolean(frostProof_not),
-      order: order
+      order: order,
+      finish: finish,
     },
   });
 

@@ -53,7 +53,7 @@ export function Calculator({
       <div className="h-50 row d-flex align-items-between justify-content-between">
         <div className="container-fluid h-100">
           <div className="row h-100">
-            <div className="col-8  d-flex align-items-start flex-column justify-content-center">
+            <div className="col-8 mt-2 d-flex align-items-start flex-column justify-content-center">
               <label>enter sf needed</label>
 
               <input
@@ -65,7 +65,7 @@ export function Calculator({
                 className="form-control"
               ></input>
             </div>
-            <div className="col-4 d-flex align-items-end flex-column justify-content-center">
+            <div className="col-4 mt-2 d-flex align-items-end flex-column justify-content-center">
               <div>
                 <label>overage</label>
                 <select onChange={handleChangeOverage} className="form-control">
