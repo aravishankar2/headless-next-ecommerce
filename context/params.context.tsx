@@ -1,16 +1,59 @@
 import { useReducer, createContext } from "react";
-import { params } from "./reducer/params";
+// import { params } from "./reducer/params";
 import { IProps } from "../interfaces/iProps";
 const initialState = {
-  limit: 20,
+  limit: '20',
   material: "",
   soldByThe: "",
   finish: "",
   frostProof: true,
   notFrostProof: true,
-  order: ""
+  order: "",
 };
-const ParamsContext = createContext({});
+
+type State = {
+  material: string;
+  finish: string;
+  soldByThe: string;
+  order: string;
+  limit: string;
+};
+
+type Action = {
+  type: string;
+  payload: string;
+};
+
+type Context = {
+  state: State;
+  dispatch: React.Dispatch<Action>;
+};
+
+const params: React.Reducer<State, Action> = (state, action) => {
+  switch (action.type) {
+    case "SOLD_PER":
+      return { ...state, soldByThe: action.payload };
+    case "MATERIAL":
+      return { ...state, material: action.payload };
+    case "LIMIT":
+      return { ...state, limit: action.payload };
+    case "FROST_PROOF":
+      return { ...state, frostProof: action.payload };
+    case "FINISH":
+      return { ...state, finish: action.payload };
+    case "LOAD_MORE":
+      return { ...state, limit: action.payload };
+    case "ORDER":
+      return { ...state, order: action.payload };
+    default:
+      return state;
+  }
+};
+
+const ParamsContext = createContext<Context>({
+  state: initialState,
+  dispatch: () => {},
+});
 
 const ParamsProvider = ({ children }: IProps) => {
   const [state, dispatch] = useReducer(params, initialState);

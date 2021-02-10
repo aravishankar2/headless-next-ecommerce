@@ -2,15 +2,27 @@ import { GET_ALL_PRODUCTS } from "../../apollo/queries/products";
 import { useState, useEffect, useRef, useContext } from "react";
 import ProductCard from "../../components/ProductCard.component";
 import FilterBar from "../../components/FilterBar.component";
-import { ParamsContext } from "../../context/params.context.tsx";
+import { ParamsContext } from "../../context/params.context";
 import { useRouter } from "next/router";
+import { Product } from "../../interfaces/Product";
+
+interface PageProps {
+  data: {
+    productCollection: {
+      total: number;
+      items: Product[];
+    };
+  };
+  loading: boolean;
+}
+
 export default function Shop({
   data: {
-    productCollection: { total, items: products, },
+    productCollection: { total, items: products },
   },
   loading,
-}) {
-  const [allProducts, setAllProducts] = useState(products);
+}: PageProps) {
+  const [allProducts, setAllProducts] = useState<Product[]>(products);
   const isInitialMount = useRef(true);
 
   const { state, dispatch } = useContext(ParamsContext);
@@ -37,25 +49,26 @@ export default function Shop({
 
   return (
     <>
-    <div className="d-flex">
-      <div>
-        <FilterBar total={total} setAllProducts={setAllProducts} />
+      <div className="d-flex">
+        <div>
+          <FilterBar
+            total={total}
+            allProducts={allProducts}
+            setAllProducts={setAllProducts}
+          />
+        </div>
+        <div className="grid-container">
+          {loading ? (
+            <div>...loading</div>
+          ) : allProducts.length === 0 ? (
+            <div className="container-center">no results found. ༼ ༎ຶ ෴ ༎ຶ༽</div>
+          ) : (
+            allProducts.map((product, i) => (
+              <ProductCard key={i} product={product} />
+            ))
+          )}
+        </div>
       </div>
-      <div className="grid-container">
-        {loading ? (
-          <div>...loading</div>
-        ) : allProducts.length === 0 ? (
-          <div className="container-center">no results found. ༼ ༎ຶ ෴ ༎ຶ༽</div>
-        ) : (
-          allProducts.map((product, i) => (
-            <ProductCard key={i} product={product} />
-          ))
-        )}
-           
-      </div>
-
-    </div>
-
     </>
   );
 }
@@ -71,7 +84,7 @@ Shop.getInitialProps = async (ctx) => {
       frostProof,
       frostProof_not,
       order,
-      finish
+      finish,
     },
   } = ctx;
   const { data, loading, error } = await apolloClient.query({

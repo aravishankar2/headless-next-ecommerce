@@ -7,6 +7,7 @@ import {
   FaFilter,
   FaBuffer,
 } from "react-icons/fa";
+import { showSFPricing } from "../helper.ts";
 import { useContext } from "react";
 import { FilterContext } from "../context/filterbar.context.tsx";
 import { ParamsContext } from "../context/params.context.tsx";
@@ -16,13 +17,12 @@ import { useRouter } from "next/router";
 // Create a dropdown to filter by material (Done)
 // Create a dropdown to filter by size (change contentful schema)
 // Create a dropdown to filter by thickness
-// Create a dropdown to filter by finish
-// Create a dropdown to filter by product type
+// Create a dropdown to filter by finish (Done)
+// Create a dropdown to filter by product type (Done)
 // Create checkboxes to filter by color
-// Create a dropdown to filter by price (you must do this on the client, as i'm using a function to determine the sf price of all items. We want to filter by what is displayed)
-// Create a checkbox to get only frost proof items (having difficulty showing ALL the products, not just ones that are either frost proof or not frost proof..may need to sort on the client side but am really trying to avoid doing this.)
-// Create a dropdown for color variation
-const FilterBar = ({ total }) => {
+// Create a dropdown to filter by price (you must do this on the client, as i'm using a function to determine the sf price of all items. We want to filter by what is displayed) (Done)
+// Create a checkbox to get only frost proof items (having difficulty showing ALL the products, not just ones that are either frost proof or not frost proof..may need to sort on the client side but am really trying to avoid doing this.) (Done)
+const FilterBar = ({ total, allProducts, setAllProducts }) => {
   const router = useRouter();
   const {
     state: { opened },
@@ -127,19 +127,13 @@ const FilterBar = ({ total }) => {
             Polished
           </MenuItem>
         </SubMenu>
-        
 
-        
         <SubMenu title="Sort By:" icon={<FaFilter />}>
           <MenuItem
             onClick={() => {
               dispatch({
                 type: "ORDER",
                 payload: "name_ASC",
-              });
-              dispatch({
-                type: "LOAD_MORE",
-                payload: 10,
               });
             }}
           >
@@ -151,13 +145,31 @@ const FilterBar = ({ total }) => {
                 type: "ORDER",
                 payload: "name_DESC",
               });
-              dispatch({
-                type: "LOAD_MORE",
-                payload: 10,
-              });
             }}
           >
             Name [DESC]
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              setAllProducts(
+                [...allProducts].sort(
+                  (a, b) => showSFPricing(a) - showSFPricing(b)
+                )
+              );
+            }}
+          >
+            Price [ASC]
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              setAllProducts(
+                [...allProducts].sort(
+                  (a, b) => showSFPricing(b) - showSFPricing(a)
+                )
+              );
+            }}
+          >
+            Price [DESC]
           </MenuItem>
         </SubMenu>
         <SubMenu title="Frost Proof" icon={<FaSnowflake />}>
@@ -323,7 +335,7 @@ const FilterBar = ({ total }) => {
             onClick={() =>
               dispatch({
                 type: "LOAD_MORE",
-                payload: state.limit + 20,
+                payload: parseInt(state.limit) + 20,
               })
             }
             disabled={total <= state.limit}

@@ -1,20 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import { GET_PRODUCT } from "../../../apollo/queries/product";
 import HandleImage from "../../../components/ImageSlider.component";
-import { Calculator } from "../../../components/Calculator.component";
+import { Calculator } from "../../../components/Calculator.component.tsx";
 import { InfoModal } from "../../../components/InfoModal.component";
 import { AiFillTool, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { FaShoppingCart, FaSnowflake } from "react-icons/fa";
 import { client } from "../../../contentful.client";
 import { useRouter } from "next/router";
 import VariantSelect from "../../../components/VariantSelect.component";
-import { showSFPricing, numberWithCommas } from "../../../helper.ts";
-export default function Product({ data: { product }, loading, error }) {
+import { showSFPricing, numberWithCommas } from "../../../helper";
+
+import { FilterContext } from "../../../context/filterbar.context";
+
+export default function Product({ data: { product }, loading }) {
   const router = useRouter();
   const [selected, setSelected] = useState(router.query.id);
   const [qty, setQty] = useState(1);
   const [options, setOptions] = useState([]);
   const [modalShow, setModalShow] = useState(false);
+  const { state, dispatch } = useContext(FilterContext);
+  const isInitialMount = useRef(true);
 
   useEffect(() => {
     (() => {
@@ -31,6 +36,16 @@ export default function Product({ data: { product }, loading, error }) {
         });
     })();
   }, [product]);
+
+
+  useEffect(() => {
+    (() =>
+    dispatch({
+      type: "TOGGLE_SEARCH",
+      payload: false,
+    }))();
+  }, [router.query.id])
+
 
   let {
     description,

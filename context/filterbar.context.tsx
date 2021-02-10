@@ -1,16 +1,44 @@
 import { useReducer, createContext } from "react";
-import { filterbar } from "./reducer/filterbar";
 import { IProps } from "../interfaces/iProps";
 
 const initialState = {
   opened: true,
+  searchOpened: false,
 };
 
-const FilterContext = createContext({});
+type State = {
+  opened: boolean;
+};
+
+type Action = {
+  type: string;
+  payload: boolean;
+};
+
+type Context = {
+  state: State;
+  dispatch: React.Dispatch<Action>;
+};
+
+const FilterContext = createContext<Context>({
+  state: initialState,
+  dispatch: () => {},
+});
+
+const filterbar: React.Reducer<State, Action> = (state, action) => {
+  switch (action.type) {
+    case "TOGGLE_OPEN":
+      return { ...state, opened: action.payload };
+    case "TOGGLE_SEARCH":
+      return { ...state, searchOpened: action.payload };
+    default:
+      return state;
+  }
+};
 
 const FilterBarProvider = ({ children }: IProps) => {
   const [state, dispatch] = useReducer(filterbar, initialState);
-  const value = { state, dispatch };
+  const value: Context = { state, dispatch };
 
   return (
     <FilterContext.Provider value={value}>{children}</FilterContext.Provider>

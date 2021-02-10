@@ -1,8 +1,8 @@
 import { Product } from "./types/Product";
 
-export const round = (val: number) => Math.round(100 * val) / 100;
+export const round = (val: number): number => Math.round(100 * val) / 100;
 
-export const showSFPricing = (product: Product) => {
+export const showSFPricing = (product: Product): number => {
   let ans;
   if (product.soldByThe === "sf") {
     ans = product.price;

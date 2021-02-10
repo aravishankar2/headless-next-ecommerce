@@ -1,7 +1,13 @@
+import {useContext} from 'react'
 import Nav from "./Nav.component";
 import Head from "next/head";
+import Search from '../components/Search.component'
+import { FilterContext } from "../context/filterbar.context.tsx";
 
-const Layout = (props) => (
+const Layout = (props) => {
+  const { state, dispatch } = useContext(FilterContext);
+
+  return (
   <div>
     <Head>
       {/* Version 2 of Snipcart */}
@@ -26,10 +32,14 @@ const Layout = (props) => (
     </Head>
     <Nav />
     <div>
-      <main>{props.children}</main>
+      <main>
+        {state.searchOpened ? <Search /> : null}
+        {props.children}
+        </main>
     </div>
     <footer></footer>
   </div>
-);
+  )
+}
 
 export default Layout;
