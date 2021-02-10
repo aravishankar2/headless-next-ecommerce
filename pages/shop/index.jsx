@@ -6,23 +6,14 @@ import { ParamsContext } from "../../context/params.context";
 import { useRouter } from "next/router";
 import { Product } from "../../interfaces/Product";
 
-interface PageProps {
-  data: {
-    productCollection: {
-      total: number;
-      items: Product[];
-    };
-  };
-  loading: boolean;
-}
 
 export default function Shop({
   data: {
     productCollection: { total, items: products },
   },
   loading,
-}: PageProps) {
-  const [allProducts, setAllProducts] = useState<Product[]>(products);
+}) {
+  const [allProducts, setAllProducts] = useState(products);
   const isInitialMount = useRef(true);
 
   const { state, dispatch } = useContext(ParamsContext);

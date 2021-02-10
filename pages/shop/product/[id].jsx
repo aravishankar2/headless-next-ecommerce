@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
 import { GET_PRODUCT } from "../../../apollo/queries/product";
 import HandleImage from "../../../components/ImageSlider.component";
-import { Calculator } from "../../../components/Calculator.component.tsx";
+import { Calculator } from "../../../components/Calculator.component.jsx";
 import { InfoModal } from "../../../components/InfoModal.component";
 import { AiFillTool, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { FaShoppingCart, FaSnowflake } from "react-icons/fa";
