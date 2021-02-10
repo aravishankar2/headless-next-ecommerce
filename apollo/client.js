@@ -23,6 +23,7 @@ const httpLink = createHttpLink({
 export default withApollo(
   ({ initialState }) =>
     new ApolloClient({
+      ssrMode: true,
       link: httpLink,
       cache: new InMemoryCache().restore(initialState || {}),
     })

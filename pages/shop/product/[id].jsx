@@ -37,15 +37,13 @@ export default function Product({ data: { product }, loading }) {
     })();
   }, [product]);
 
-
   useEffect(() => {
     (() =>
-    dispatch({
-      type: "TOGGLE_SEARCH",
-      payload: false,
-    }))();
-  }, [router.query.id])
-
+      dispatch({
+        type: "TOGGLE_SEARCH",
+        payload: false,
+      }))();
+  }, [router.query.id]);
 
   let {
     description,
