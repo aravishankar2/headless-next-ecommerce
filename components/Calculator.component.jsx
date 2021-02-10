@@ -2,12 +2,6 @@ import React, { useState, useEffect } from "react";
 import { checkIfValsThere } from "../helper";
 import {Product} from '../interfaces/Product'
 
-interface CalcProps {
-  product: Product[],
-  squareFootPerBox: number,
-  squareFootPerPiece: number,
-  setQty: () => {}
-} 
 
 
 export function Calculator({
@@ -15,7 +9,7 @@ export function Calculator({
   squareFootPerBox,
   squareFootPerPiece,
   setQty,
-}: CalcProps) {
+}) {
   let [sfNeeded, setSfNeeded] = useState(0);
   let [totalSF, setTotalSF] = useState(0);
   let [totalPCS, setTotalPCS] = useState(0);
