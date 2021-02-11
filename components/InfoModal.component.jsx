@@ -1,7 +1,9 @@
 import React from "react";
 import { Modal, Container, Row, Col, Button } from "react-bootstrap";
 import { checkIfValsThere, round, numberWithCommas } from "../helper.ts";
+
 export function InfoModal(props) {
+
   return (
     <Modal
       size="xl"
@@ -25,7 +27,7 @@ export function InfoModal(props) {
               </div>
             </Col>
             <Col xs={12} sm={4} md={4}>
-            <div className=" p-3 m-1">
+              <div className=" p-3 m-1">
                 <div>weight:</div>{" "}
                 <div className="text-muted font-italic">
                   {props.product.weight} lbs
@@ -70,9 +72,7 @@ export function InfoModal(props) {
               <div className=" p-3 m-1">
                 <div>finish:</div>{" "}
                 <div className="text-muted font-italic">
-                  {
-                     checkIfValsThere(props.product.finish)
-                   }
+                  {checkIfValsThere(props.product.finish)}
                 </div>
               </div>
             </Col>

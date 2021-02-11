@@ -1,10 +1,25 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
-
+import SimpleReactLightbox,{ SRLWrapper } from "simple-react-lightbox";
 const ImageSlider = ({ data }) => {
   const [current, setCurrent] = useState(0);
-
+  const options = {
+    settings: {},
+    caption: {},
+    buttons: {
+      showNextButton: false,
+      showPrevButton: false,
+      showThumbnailsButton: false,
+      showAutoplayButton: false,
+    },
+    thumbnails: {
+      showThumbnails: false,
+    },
+    progressBar:{},
+    translations: {}, // PRO ONLY
+    icons: {} // PRO ONLY
+  }
   const nextSlide = () => {
     setCurrent(current === data.length - 1 ? 0 : current + 1);
   };
@@ -28,8 +43,11 @@ const ImageSlider = ({ data }) => {
         onClick={() => nextSlide()}
         style={{ opacity: "0.3" }}
       />
+     
       {data.map(({ public_id, context }, index) => {
         return (
+          <SimpleReactLightbox>
+          <SRLWrapper options={options}>
           <div
             className={index === current ? "slide active" : "slide"}
             key={index}
@@ -37,6 +55,7 @@ const ImageSlider = ({ data }) => {
           >
             {index === current && (
               <div>
+                
                 <Image
                   key={public_id}
                   src={public_id}
@@ -45,25 +64,33 @@ const ImageSlider = ({ data }) => {
                   height={100}
                   alt={public_id}
                 />
+             
                 <p className="text-muted">
                   <em>{context ? context.custom.caption : null}</em>
                 </p>
               </div>
             )}
           </div>
+          </SRLWrapper>
+</SimpleReactLightbox>
         );
       })}
+
+
     </section>
   );
 };
 
 const HandleImage = ({ productImage }) => {
   return productImage ? (
+  
     <div className="mb-4">
       {productImage.length > 1 ? (
+        
         <ImageSlider data={productImage} />
       ) : (
         <div>
+          
           <Image
             key={productImage[0].public_id}
             src={productImage[0].public_id}
@@ -72,6 +99,7 @@ const HandleImage = ({ productImage }) => {
             height={200}
             alt={productImage[0].public_id}
           />
+          
           <p className="text-muted">
             <em>
               {productImage[0].context

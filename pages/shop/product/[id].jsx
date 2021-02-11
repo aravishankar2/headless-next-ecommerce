@@ -9,7 +9,6 @@ import { client } from "../../../contentful.client";
 import { useRouter } from "next/router";
 import VariantSelect from "../../../components/VariantSelect.component";
 import { showSFPricing, numberWithCommas } from "../../../helper";
-
 import { FilterContext } from "../../../context/filterbar.context";
 
 export default function Product({ data: { product }, loading }) {
@@ -22,6 +21,7 @@ export default function Product({ data: { product }, loading }) {
   const isInitialMount = useRef(true);
 
   useEffect(() => {
+   
     (() => {
       let arr = product.variantsCollection.items.map(({ sys: { id } }) => id);
 
@@ -44,6 +44,14 @@ export default function Product({ data: { product }, loading }) {
         payload: false,
       }))();
   }, [router.query.id]);
+
+
+  // This gets the cart items from Snipcart, not sure if the rates api is worth it just yet
+
+  // useEffect(() => {
+  // var items = Snipcart.api.items.all();
+  // console.log(items)
+  // }, [modalShow]);
 
   let {
     description,

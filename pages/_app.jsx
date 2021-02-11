@@ -6,6 +6,7 @@ import "../styles/globals.css";
 import Layout from "../components/Layout.component";
 import { ParamsProvider } from "../context/params.context.tsx";
 import { FilterBarProvider } from "../context/filterbar.context.tsx";
+import SimpleReactLightbox from "simple-react-lightbox";
 
 class MyApp extends App {
   render() {
@@ -15,7 +16,9 @@ class MyApp extends App {
         <ParamsProvider>
           <FilterBarProvider>
             <Layout>
-              <Component {...pageProps} />
+              <SimpleReactLightbox>
+                <Component {...pageProps} />
+              </SimpleReactLightbox>
             </Layout>
           </FilterBarProvider>
         </ParamsProvider>

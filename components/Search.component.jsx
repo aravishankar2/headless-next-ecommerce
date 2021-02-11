@@ -8,7 +8,10 @@ const searchClient = algoliasearch(
 );
 
 const Hit = ({ hit }) => (
-  <div className="d-flex pr-3 pt-3 pb-3 align-items-center">
+  <div
+    className="d-flex pr-3 pt-3 pb-3 align-items-center"
+    style={{ cursor: "pointer" }}
+  >
     <Link href={`/shop/product/${hit.sys.id}`}>
       <img
         src={hit.fields.productImage["en-US"][0].url}

@@ -3,7 +3,6 @@ import { Navbar } from "react-bootstrap";
 import { FaShoppingCart, FaSearch, FaTimes } from "react-icons/fa";
 import { FilterContext } from "../context/filterbar.context.tsx";
 import { ParamsContext } from "../context/params.context.tsx";
-import { Form } from "react-bootstrap";
 const Nav = () => {
   const { state, dispatch } = useContext(FilterContext);
   const {
@@ -17,7 +16,7 @@ const Nav = () => {
             <Navbar.Brand href={`/shop/?limit=${limit}`}>
               E - Commerce
             </Navbar.Brand>
-            <Form>
+            {/* <Form>
               <Form.Check
                 onChange={() => {
                   dispatch({
@@ -30,7 +29,7 @@ const Nav = () => {
                 id="custom-switch"
                 label={state.opened ? "hide filter bar" : "show filter bar"}
               />
-            </Form>
+            </Form> */}
           </div>
 
           <div className="d-flex">

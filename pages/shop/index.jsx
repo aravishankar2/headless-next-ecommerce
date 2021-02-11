@@ -3,9 +3,9 @@ import { useState, useEffect, useRef, useContext } from "react";
 import ProductCard from "../../components/ProductCard.component";
 import FilterBar from "../../components/FilterBar.component";
 import { ParamsContext } from "../../context/params.context";
+import { FilterContext } from "../../context/filterbar.context";
 import { useRouter } from "next/router";
-import { Product } from "../../interfaces/Product";
-
+import { Form } from "react-bootstrap";
 
 export default function Shop({
   data: {
@@ -17,6 +17,10 @@ export default function Shop({
   const isInitialMount = useRef(true);
 
   const { state, dispatch } = useContext(ParamsContext);
+  const {
+    state: { opened },
+    dispatch: filterDispatch,
+  } = useContext(FilterContext);
   const router = useRouter();
   useEffect(() => {
     setAllProducts(products);
@@ -40,6 +44,23 @@ export default function Shop({
 
   return (
     <>
+      <div className="container">
+        {" "}
+        <Form>
+          <Form.Check
+            onChange={() => {
+              filterDispatch({
+                type: "TOGGLE_OPEN",
+                payload: !opened,
+              });
+            }}
+            checked={opened}
+            type="switch"
+            id="custom-switch"
+            label={opened ? "hide filter bar" : "show filter bar"}
+          />
+        </Form>
+      </div>
       <div className="d-flex">
         <div>
           <FilterBar
