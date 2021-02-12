@@ -1,25 +1,28 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
-import SimpleReactLightbox,{ SRLWrapper } from "simple-react-lightbox";
+import { SRLWrapper } from "simple-react-lightbox";
+const options = {
+  settings: {},
+  caption: {
+    showCaption: false
+  },
+  buttons: {
+    showNextButton: false,
+    showPrevButton: false,
+    showThumbnailsButton: false,
+    showAutoplayButton: false,
+  },
+  thumbnails: {
+    showThumbnails: false,
+  },
+  progressBar:{},
+  translations: {}, // PRO ONLY
+  icons: {} // PRO ONLY
+}
 const ImageSlider = ({ data }) => {
   const [current, setCurrent] = useState(0);
-  const options = {
-    settings: {},
-    caption: {},
-    buttons: {
-      showNextButton: false,
-      showPrevButton: false,
-      showThumbnailsButton: false,
-      showAutoplayButton: false,
-    },
-    thumbnails: {
-      showThumbnails: false,
-    },
-    progressBar:{},
-    translations: {}, // PRO ONLY
-    icons: {} // PRO ONLY
-  }
+  
   const nextSlide = () => {
     setCurrent(current === data.length - 1 ? 0 : current + 1);
   };
@@ -46,7 +49,7 @@ const ImageSlider = ({ data }) => {
      
       {data.map(({ public_id, context }, index) => {
         return (
-          <SimpleReactLightbox>
+          
           <SRLWrapper options={options}>
           <div
             className={index === current ? "slide active" : "slide"}
@@ -72,7 +75,7 @@ const ImageSlider = ({ data }) => {
             )}
           </div>
           </SRLWrapper>
-</SimpleReactLightbox>
+
         );
       })}
 
@@ -90,7 +93,7 @@ const HandleImage = ({ productImage }) => {
         <ImageSlider data={productImage} />
       ) : (
         <div>
-          
+          <SRLWrapper options={options}>
           <Image
             key={productImage[0].public_id}
             src={productImage[0].public_id}
@@ -99,7 +102,7 @@ const HandleImage = ({ productImage }) => {
             height={200}
             alt={productImage[0].public_id}
           />
-          
+          </SRLWrapper>
           <p className="text-muted">
             <em>
               {productImage[0].context
