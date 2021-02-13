@@ -1,9 +1,9 @@
 import { ApolloProvider } from "@apollo/react-hooks";
-import withApolloClient from "../apollo/client";
+import withApolloClient from "../apollo/client.ts";
 import App from "next/app";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../styles/globals.css";
-import Layout from "../components/Layout.component";
+import "../styles/globals.scss";
+import Layout from "../components/layout/Layout.component.tsx";
 import { ParamsProvider } from "../context/params.context.tsx";
 import { FilterBarProvider } from "../context/filterbar.context.tsx";
 import SimpleReactLightbox from "simple-react-lightbox";

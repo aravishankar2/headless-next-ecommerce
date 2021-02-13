@@ -8,6 +8,7 @@ const initialState = {
 
 type State = {
   opened: boolean;
+  searchOpened: boolean;
 };
 
 type Action = {

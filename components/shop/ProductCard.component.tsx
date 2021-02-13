@@ -1,7 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
-import { showSFPricing } from "../helper.ts";
-const ProductCard = ({ product }) => {
+import { showSFPricing } from "../../helper";
+import { Product } from "../../interfaces/Product";
+
+export type ProductProps = {
+  product: Product;
+};
+
+const ProductCard = ({ product }: ProductProps) => {
   return (
     <div>
       <Link href={`/shop/product/${product.sys.id}`}>

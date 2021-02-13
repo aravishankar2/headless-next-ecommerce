@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { Navbar } from "react-bootstrap";
 import { FaShoppingCart, FaSearch, FaTimes } from "react-icons/fa";
-import { FilterContext } from "../context/filterbar.context.tsx";
-import { ParamsContext } from "../context/params.context.tsx";
+import { FilterContext } from "../../context/filterbar.context.tsx";
+import { ParamsContext } from "../../context/params.context.tsx";
 const Nav = () => {
   const { state, dispatch } = useContext(FilterContext);
   const {
@@ -16,20 +16,6 @@ const Nav = () => {
             <Navbar.Brand href={`/shop/?limit=${limit}`}>
               E - Commerce
             </Navbar.Brand>
-            {/* <Form>
-              <Form.Check
-                onChange={() => {
-                  dispatch({
-                    type: "TOGGLE_OPEN",
-                    payload: !state.opened,
-                  });
-                }}
-                checked={state.opened}
-                type="switch"
-                id="custom-switch"
-                label={state.opened ? "hide filter bar" : "show filter bar"}
-              />
-            </Form> */}
           </div>
 
           <div className="d-flex">

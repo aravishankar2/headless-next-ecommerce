@@ -7,23 +7,13 @@ import {
   FaFilter,
   FaBuffer,
 } from "react-icons/fa";
-import { showSFPricing } from "../helper.ts";
+import { showSFPricing } from "../../helper";
 import { useContext } from "react";
-import { FilterContext } from "../context/filterbar.context.tsx";
-import { ParamsContext } from "../context/params.context.tsx";
+import { FilterContext } from "../../context/filterbar.context";
+import { ParamsContext } from "../../context/params.context";
 import { Form, Button } from "react-bootstrap";
-import { useRouter } from "next/router";
-// Create a dropdown to filter by items sold per (Done)
-// Create a dropdown to filter by material (Done)
-// Create a dropdown to filter by size (change contentful schema)
-// Create a dropdown to filter by thickness
-// Create a dropdown to filter by finish (Done)
-// Create a dropdown to filter by product type (Done)
-// Create checkboxes to filter by color
-// Create a dropdown to filter by price (you must do this on the client, as i'm using a function to determine the sf price of all items. We want to filter by what is displayed) (Done)
-// Create a checkbox to get only frost proof items (having difficulty showing ALL the products, not just ones that are either frost proof or not frost proof..may need to sort on the client side but am really trying to avoid doing this.) (Done)
+
 const FilterBar = ({ total, allProducts, setAllProducts }) => {
-  const router = useRouter();
   const {
     state: { opened },
   } = useContext(FilterContext);
@@ -32,7 +22,6 @@ const FilterBar = ({ total, allProducts, setAllProducts }) => {
   return (
     <ProSidebar collapsed={!opened}>
       <Menu iconShape="square">
-        {/* <MenuItem icon={<FaGem />}>Filter</MenuItem> */}
         <SubMenu title="Sold Per" icon={<FaBoxOpen />}>
           <MenuItem
             onClick={() => {
@@ -174,7 +163,6 @@ const FilterBar = ({ total, allProducts, setAllProducts }) => {
         </SubMenu>
         <SubMenu title="Frost Proof" icon={<FaSnowflake />}>
           <MenuItem>
-            {/* <Form.Group controlId="formBasicCheckbox"> */}
             <Form.Check
               onChange={() => {
                 dispatch({
@@ -189,7 +177,6 @@ const FilterBar = ({ total, allProducts, setAllProducts }) => {
               type="checkbox"
               label="show frost proof"
             />
-            {/* </Form.Group> */}
           </MenuItem>
         </SubMenu>
         <SubMenu title="Material" icon={<FaThLarge />}>

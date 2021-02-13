@@ -1,31 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { checkIfValsThere } from "../helper";
-import {Product} from '../interfaces/Product'
+import { checkIfValsThere } from "../../helper";
+import { Product } from "../../interfaces/Product";
 
-
+interface CalcProps {
+  product: Product;
+  squareFootPerBox: number;
+  squareFootPerPiece: number;
+  setQty: React.Dispatch<React.SetStateAction<number>>;
+}
 
 export function Calculator({
   product,
   squareFootPerBox,
   squareFootPerPiece,
   setQty,
-}) {
-  let [sfNeeded, setSfNeeded] = useState(0);
-  let [totalSF, setTotalSF] = useState(0);
-  let [totalPCS, setTotalPCS] = useState(0);
-  let [boxesNeeded, setBoxesNeeded] = useState(0);
-  let [overage, setOverage] = useState(0.15);
+}: CalcProps) {
+  let [sfNeeded, setSfNeeded] = useState<number>(0);
+  let [totalSF, setTotalSF] = useState<number>(0);
+  let [totalPCS, setTotalPCS] = useState<number>(0);
+  let [boxesNeeded, setBoxesNeeded] = useState<number>(0);
+  let [overage, setOverage] = useState<number>(0.15);
 
-  const handleChangeInput = (e) => {
-    setSfNeeded(e.target.value);
-    setTotalSF(
-      parseFloat(
-        parseInt(sfNeeded).toFixed(2) * parseFloat(overage) + parseInt(sfNeeded)
-      )
-    );
+  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = parseInt(e.target.value);
+    setSfNeeded(value);
+    setTotalSF(sfNeeded * overage + sfNeeded);
   };
 
-  const handleChangeOverage = (e) => {
+  const handleChangeOverage = (e: React.ChangeEvent<HTMLSelectElement>) => {
     switch (e.target.value) {
       case "15":
         setOverage(0.15);
@@ -44,12 +46,12 @@ export function Calculator({
 
   useEffect(() => {
     // input value with factored in overage percentage = total sf
-    setTotalSF(parseInt(sfNeeded) * parseFloat(overage) + parseInt(sfNeeded));
+    setTotalSF(sfNeeded * overage + sfNeeded);
     // pieces per sf * total sf = total pieces
-    setTotalPCS(parseFloat((1 / squareFootPerPiece) * totalSF));
+    setTotalPCS((1 / squareFootPerPiece) * totalSF);
     // total pieces / pieces per box = boxes needed
     //IMPORTANT: This relys on a field that is potentially not there. You may need to recalc using different values
-    setBoxesNeeded(parseFloat(sfNeeded / product.squareFootPerBox).toFixed());
+    setBoxesNeeded(sfNeeded / product.squareFootPerBox);
   }, [sfNeeded, totalSF, totalPCS, overage]);
 
   return (
@@ -90,38 +92,34 @@ export function Calculator({
             <div className="row h-100 mt-4">
               <div className="col-4 d-flex justify-content-center align-items-center">
                 <div className="text-center">
-                  <h3>{checkIfValsThere(parseFloat(totalSF).toFixed())}</h3>
+                  <h3>{checkIfValsThere(totalSF.toFixed())}</h3>
                   <span className="text-muted">total sf</span>
                 </div>
               </div>
               <div className="col-4 d-flex justify-content-center align-items-center">
                 <div className="text-center">
-                  <h3>{checkIfValsThere(parseFloat(totalPCS).toFixed())}</h3>
+                  <h3>{checkIfValsThere(totalPCS.toFixed())}</h3>
                   <span className="text-muted">total pcs</span>
                 </div>
               </div>
               <div className="col-4 d-flex justify-content-center align-items-center">
                 <div className="text-center">
-                  <h3>{checkIfValsThere(parseFloat(boxesNeeded).toFixed())}</h3>
+                  <h3>{checkIfValsThere(boxesNeeded.toFixed())}</h3>
                   <span className="text-muted">boxes needed</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        
       </div>
       <div className="p-0 d-flex justify-content-center">
         <button
           disabled={
-            (product.soldByThe === "box" && boxesNeeded == 0) ||
-            boxesNeeded === "NaN"
+            product.soldByThe === "box" && boxesNeeded == 0
               ? true
-              : (product.soldByThe === "pc" && totalPCS == 0) ||
-                totalPCS === "NaN"
+              : product.soldByThe === "pc" && totalPCS == 0
               ? true
-              : (product.soldByThe === "sf" && totalSF == 0) ||
-                totalSF === "NaN"
+              : product.soldByThe === "sf" && totalSF == 0
               ? true
               : false
           }

@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { SRLWrapper } from "simple-react-lightbox";
 const options = {
   settings: {},
   caption: {
-    showCaption: false
+    showCaption: false,
   },
   buttons: {
     showNextButton: false,
@@ -16,41 +15,19 @@ const options = {
   thumbnails: {
     showThumbnails: false,
   },
-  progressBar:{},
-  translations: {}, // PRO ONLY
-  icons: {} // PRO ONLY
-}
+  progressBar: {},
+};
+
 const ImageSlider = ({ data }) => {
   const [current, setCurrent] = useState(0);
-  
-  const nextSlide = () => {
-    setCurrent(current === data.length - 1 ? 0 : current + 1);
-  };
-
-  const prevSlide = () => {
-    setCurrent(current === 0 ? data.length - 1 : current - 1);
-  };
 
   if (!Array.isArray(data) || data.length <= 0) {
     return null;
   }
   return (
     <section className="slider">
-      <BsChevronLeft
-        onClick={() => prevSlide()}
-        className="left-arrow"
-        style={{ opacity: "0.3" }}
-      />
-      <BsChevronRight
-        className="right-arrow"
-        onClick={() => nextSlide()}
-        style={{ opacity: "0.3" }}
-      />
-     
       {data.map(({ public_id, context }, index) => {
         return (
-          
-          <SRLWrapper options={options}>
           <div
             className={index === current ? "slide active" : "slide"}
             key={index}
@@ -58,8 +35,39 @@ const ImageSlider = ({ data }) => {
           >
             {index === current && (
               <div>
-                
+                <SRLWrapper options={options}>
+                  <Image
+                    key={public_id}
+                    src={public_id}
+                    layout="responsive"
+                    width={100}
+                    height={100}
+                    alt={public_id}
+                  />
+                </SRLWrapper>
+
+                <p className="text-muted">
+                  <em>{context ? context.custom.caption : null}</em>
+                </p>
+              </div>
+            )}
+          </div>
+        );
+      })}
+
+      <div className="d-flex flex-wrap mt-4 w-100">
+        {data.map(({ public_id }, index) => {
+          return (
+            <div key={index} className="w-25">
+              <div
+                className={`grid-item m-0  ${
+                  index === current ? "selected-image" : ""
+                }`}
+              >
                 <Image
+                  onClick={() => {
+                    setCurrent(index);
+                  }}
                   key={public_id}
                   src={public_id}
                   layout="responsive"
@@ -67,41 +75,31 @@ const ImageSlider = ({ data }) => {
                   height={100}
                   alt={public_id}
                 />
-             
-                <p className="text-muted">
-                  <em>{context ? context.custom.caption : null}</em>
-                </p>
               </div>
-            )}
-          </div>
-          </SRLWrapper>
-
-        );
-      })}
-
-
+            </div>
+          );
+        })}
+      </div>
     </section>
   );
 };
 
 const HandleImage = ({ productImage }) => {
   return productImage ? (
-  
-    <div className="mb-4">
+    <div>
       {productImage.length > 1 ? (
-        
         <ImageSlider data={productImage} />
       ) : (
         <div>
           <SRLWrapper options={options}>
-          <Image
-            key={productImage[0].public_id}
-            src={productImage[0].public_id}
-            layout="responsive"
-            width={200}
-            height={200}
-            alt={productImage[0].public_id}
-          />
+            <Image
+              key={productImage[0].public_id}
+              src={productImage[0].public_id}
+              layout="responsive"
+              width={200}
+              height={200}
+              alt={productImage[0].public_id}
+            />
           </SRLWrapper>
           <p className="text-muted">
             <em>

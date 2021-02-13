@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
 import { GET_PRODUCT } from "../../../apollo/queries/product";
-import HandleImage from "../../../components/ImageSlider.component";
-import { Calculator } from "../../../components/Calculator.component.jsx";
-import { InfoModal } from "../../../components/InfoModal.component";
+import HandleImage from "../../../components/product/ImageSlider.component";
+import { Calculator } from "../../../components/product/Calculator.component.tsx";
+import { InfoModal } from "../../../components/product/InfoModal.component";
 import { AiFillTool, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { FaShoppingCart, FaSnowflake } from "react-icons/fa";
 import { client } from "../../../contentful.client";
 import { useRouter } from "next/router";
-import VariantSelect from "../../../components/VariantSelect.component";
+import VariantSelect from "../../../components/product/VariantSelect.component";
 import { showSFPricing, numberWithCommas } from "../../../helper";
 import { FilterContext } from "../../../context/filterbar.context";
 
@@ -17,11 +17,9 @@ export default function Product({ data: { product }, loading }) {
   const [qty, setQty] = useState(1);
   const [options, setOptions] = useState([]);
   const [modalShow, setModalShow] = useState(false);
-  const { state, dispatch } = useContext(FilterContext);
-  const isInitialMount = useRef(true);
+  const { dispatch } = useContext(FilterContext);
 
   useEffect(() => {
-   
     (() => {
       let arr = product.variantsCollection.items.map(({ sys: { id } }) => id);
 
@@ -45,7 +43,6 @@ export default function Product({ data: { product }, loading }) {
       }))();
   }, [router.query.id]);
 
-
   // This gets the cart items from Snipcart, not sure if the rates api is worth it just yet
 
   // useEffect(() => {
@@ -54,7 +51,6 @@ export default function Product({ data: { product }, loading }) {
   // }, [modalShow]);
 
   let {
-    description,
     productImage,
     name,
     frostProof,
@@ -80,9 +76,6 @@ export default function Product({ data: { product }, loading }) {
           <div className="col-md">
             <HandleImage productImage={productImage} />
             {/* Image Component Goes Here */}
-            <div className="mb-4 pt-2">
-              <em style={{ lineHeight: "1.2em" }}>"{description}"</em>
-            </div>
           </div>
 
           {/* The rest of the product info goes here. */}

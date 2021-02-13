@@ -6,7 +6,6 @@ export const GET_PRODUCT = gql`
       application
       color
       colorVariation
-      description
       finish
       frostProof
       length

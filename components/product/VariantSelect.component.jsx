@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useContext } from "react";
 import { useRouter } from "next/router";
-import { FilterContext } from "../context/filterbar.context";
 
 export default function VariantSelect({
   product,
@@ -13,17 +12,14 @@ export default function VariantSelect({
     setSelected(e.target.value);
   };
   const isInitialMount = useRef(true);
-  const { dispatch } = useContext(FilterContext);
 
   useEffect(() => {
     if (isInitialMount.current) {
       isInitialMount.current = false;
     } else {
       router.push(selected);
-  
     }
   }, [selected]);
-
 
   return (
     <div className="form-group h-100 w-50">

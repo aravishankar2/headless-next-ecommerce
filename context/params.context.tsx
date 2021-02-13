@@ -2,7 +2,7 @@ import { useReducer, createContext } from "react";
 // import { params } from "./reducer/params";
 import { IProps } from "../interfaces/iProps";
 const initialState = {
-  limit: '20',
+  limit: "20",
   material: "",
   soldByThe: "",
   finish: "",
@@ -17,6 +17,7 @@ type State = {
   soldByThe: string;
   order: string;
   limit: string;
+  frostProof: boolean
 };
 
 type Action = {
@@ -38,7 +39,7 @@ const params: React.Reducer<State, Action> = (state, action) => {
     case "LIMIT":
       return { ...state, limit: action.payload };
     case "FROST_PROOF":
-      return { ...state, frostProof: action.payload };
+      return { ...state, frostProof: Boolean(action.payload) };
     case "FINISH":
       return { ...state, finish: action.payload };
     case "LOAD_MORE":

@@ -1,26 +1,35 @@
 import { GET_ALL_PRODUCTS } from "../../apollo/queries/products";
 import { useState, useEffect, useRef, useContext } from "react";
-import ProductCard from "../../components/ProductCard.component";
-import FilterBar from "../../components/FilterBar.component";
+import ProductCard from "../../components/shop/ProductCard.component";
+import FilterBar from "../../components/shop/FilterBar.component";
 import { ParamsContext } from "../../context/params.context";
-import { FilterContext } from "../../context/filterbar.context";
 import { useRouter } from "next/router";
-import { Form } from "react-bootstrap";
+import { Product } from "../../interfaces/Product";
+
+interface Props {
+  data: {
+    productCollection: {
+      total: number;
+      items: Product[];
+    };
+  };
+  loading: boolean;
+}
 
 export default function Shop({
   data: {
     productCollection: { total, items: products },
   },
   loading,
-}) {
+}: Props) {
   const [allProducts, setAllProducts] = useState(products);
   const isInitialMount = useRef(true);
 
-  const { state, dispatch } = useContext(ParamsContext);
-  const {
-    state: { opened },
-    dispatch: filterDispatch,
-  } = useContext(FilterContext);
+  const { state } = useContext(ParamsContext);
+  // const {
+  //   state: { opened },
+  //   dispatch: filterDispatch,
+  // } = useContext(FilterContext);
   const router = useRouter();
   useEffect(() => {
     setAllProducts(products);
@@ -45,7 +54,7 @@ export default function Shop({
   return (
     <>
       <div className="container">
-        {" "}
+        {/* {" "}
         <Form>
           <Form.Check
             onChange={() => {
@@ -59,7 +68,7 @@ export default function Shop({
             id="custom-switch"
             label={opened ? "hide filter bar" : "show filter bar"}
           />
-        </Form>
+        </Form> */}
       </div>
       <div className="d-flex">
         <div>
@@ -73,7 +82,7 @@ export default function Shop({
           {loading ? (
             <div>...loading</div>
           ) : allProducts.length === 0 ? (
-            <div className="container-center">no results found. ༼ ༎ຶ ෴ ༎ຶ༽</div>
+            <div className="container-center">no results found.</div>
           ) : (
             allProducts.map((product, i) => (
               <ProductCard key={i} product={product} />
@@ -84,6 +93,8 @@ export default function Shop({
     </>
   );
 }
+
+
 
 Shop.getInitialProps = async (ctx) => {
   const {

@@ -1,4 +1,8 @@
+import { ProductImage } from "./ProductImage";
 export type Product = {
+  sys: {
+    id: string;
+  };
   name: string;
   productType: string;
   material: string;
@@ -21,6 +25,6 @@ export type Product = {
   application: string;
   sku: string;
   // ADD THE FOLLOWING CUSTOM TYPES
-  // productImage
+  productImage: ProductImage[];
   // variantsCollection
 };

@@ -1,13 +1,35 @@
 import algoliasearch from "algoliasearch/lite";
 import { InstantSearch, SearchBox, Hits } from "react-instantsearch-dom";
 import Link from "next/link";
+import { ProductImage } from "../../interfaces/ProductImage";
 
 const searchClient = algoliasearch(
   "Q7XICK98SI",
   "de8e0b025f44fb4a26d38156848d20ef"
 );
 
-const Hit = ({ hit }) => (
+type Product = {
+  name: {
+    "en-US": string;
+  };
+  productImage: {
+    "en-US": ProductImage[];
+  };
+  material: {
+    "en-US": string;
+  };
+};
+
+export interface Hit {
+  hit: {
+    fields: Product;
+    sys: {
+      id: string;
+    };
+  };
+}
+
+const Hit = ({ hit }: Hit) => (
   <div
     className="d-flex pr-3 pt-3 pb-3 align-items-center"
     style={{ cursor: "pointer" }}
