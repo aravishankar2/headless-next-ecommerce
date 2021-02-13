@@ -1,9 +1,18 @@
 import React from "react";
 import { Modal, Container, Row, Col, Button } from "react-bootstrap";
-import { checkIfValsThere, round, numberWithCommas } from "../../helper.ts";
+import { checkIfValsThere, round, numberWithCommas } from "../../helper";
+import { Product } from "../../interfaces/Product";
 
-export function InfoModal(props) {
+interface Props {
+  product: Product;
+  pricePerBox: number;
+  pricePerPiece: number;
+  pricePerSquareFoot: number;
+  modalShow: boolean;
+  onHide: (value: React.SetStateAction<boolean>) => void;
+}
 
+export function InfoModal(props: Props) {
   return (
     <Modal
       size="xl"
@@ -174,7 +183,7 @@ export function InfoModal(props) {
               <div className="border p-3 m-1">
                 <div>sf / box: </div>
                 <div className="text-muted font-italic">
-                  {checkIfValsThere(props.squareFootPerBox)}
+                  {checkIfValsThere(props.product.squareFootPerBox)}
                 </div>
               </div>
             </Col>
@@ -191,7 +200,10 @@ export function InfoModal(props) {
         </Container>
       </Modal.Body>
       <Modal.Footer>
-        <Button className="btn btn-secondary" onClick={props.onHide}>
+        <Button
+          className="btn btn-secondary"
+          onClick={() => props.onHide(false)}
+        >
           Close
         </Button>
       </Modal.Footer>

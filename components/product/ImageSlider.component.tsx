@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { SRLWrapper } from "simple-react-lightbox";
+import { ProductImage } from "../../interfaces/ProductImage";
 const options = {
   settings: {},
   caption: {
@@ -18,7 +19,11 @@ const options = {
   progressBar: {},
 };
 
-const ImageSlider = ({ data }) => {
+interface ProductImages {
+  data: ProductImage[]
+}
+
+const ImageSlider = ({ data }: ProductImages) => {
   const [current, setCurrent] = useState(0);
 
   if (!Array.isArray(data) || data.length <= 0) {
@@ -84,7 +89,11 @@ const ImageSlider = ({ data }) => {
   );
 };
 
-const HandleImage = ({ productImage }) => {
+interface ImageProps {
+  productImage: ProductImage[]
+}
+
+const HandleImage = ({ productImage }: ImageProps) => {
   return productImage ? (
     <div>
       {productImage.length > 1 ? (

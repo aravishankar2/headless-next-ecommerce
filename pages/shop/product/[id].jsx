@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useContext, useRef } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { GET_PRODUCT } from "../../../apollo/queries/product";
-import HandleImage from "../../../components/product/ImageSlider.component";
+import HandleImage from "../../../components/product/ImageSlider.component.tsx";
 import { Calculator } from "../../../components/product/Calculator.component.tsx";
-import { InfoModal } from "../../../components/product/InfoModal.component";
+import { InfoModal } from "../../../components/product/InfoModal.component.tsx";
 import { AiFillTool, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { FaShoppingCart, FaSnowflake } from "react-icons/fa";
 import { client } from "../../../contentful.client";
@@ -59,8 +59,6 @@ export default function Product({ data: { product }, loading }) {
     productType,
     price,
     squareFootPerPiece,
-    length,
-    width,
     variantsCollection,
     squareFootPerBox,
     piecesPerBox,
@@ -163,10 +161,8 @@ export default function Product({ data: { product }, loading }) {
 
               <InfoModal
                 show={modalShow}
-                onHide={() => setModalShow(false)}
+                onHide={setModalShow}
                 product={product}
-                length={length}
-                width={width}
                 pricePerBox={
                   soldByThe === "box"
                     ? price
@@ -188,7 +184,6 @@ export default function Product({ data: { product }, loading }) {
                     ? price * squareFootPerPiece
                     : price / squareFootPerBox
                 }
-                squareFootPerBox={squareFootPerBox}
               />
               {variantsCollection.items.length !== 0 ? (
                 <VariantSelect
