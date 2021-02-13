@@ -67,7 +67,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "pages/shop/index.jsx"  ],
   "exclude": [
     "node_modules"
   ]
