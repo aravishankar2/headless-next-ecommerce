@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { GET_PRODUCT } from "../../../apollo/queries/product";
-import HandleImage from "../../../components/product/ImageSlider.component.tsx";
+import HandleImage from "../../../components/product/ImageSlider.component.jsx";
 import { Calculator } from "../../../components/product/Calculator.component.tsx";
 import { InfoModal } from "../../../components/product/InfoModal.component.tsx";
 import { AiFillTool, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";

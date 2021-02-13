@@ -19,11 +19,7 @@ const options = {
   progressBar: {},
 };
 
-interface ProductImages {
-  data: ProductImage[]
-}
-
-const ImageSlider = ({ data }: ProductImages) => {
+const ImageSlider = ({ data }) => {
   const [current, setCurrent] = useState(0);
 
   if (!Array.isArray(data) || data.length <= 0) {
@@ -89,11 +85,9 @@ const ImageSlider = ({ data }: ProductImages) => {
   );
 };
 
-interface ImageProps {
-  productImage: ProductImage[]
-}
 
-const HandleImage = ({ productImage }: ImageProps) => {
+
+const HandleImage = ({ productImage }) => {
   return productImage ? (
     <div>
       {productImage.length > 1 ? (
