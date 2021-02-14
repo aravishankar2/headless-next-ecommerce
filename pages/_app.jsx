@@ -3,7 +3,7 @@ import withApolloClient from "../apollo/client.ts";
 import App from "next/app";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/globals.scss";
-import "../styles/override.css";
+import "../styles/override.scss";
 import Layout from "../components/layout/Layout.component.tsx";
 import { ParamsProvider } from "../context/params.context.tsx";
 import { FilterBarProvider } from "../context/filterbar.context.tsx";

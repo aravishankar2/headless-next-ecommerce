@@ -1,3 +1,6 @@
+@import './_variables.scss';
+
+
 /* overriding react-pro-sidebar styles */
 .pro-sidebar.collapsed {
   width: 0px !important;
@@ -9,7 +12,7 @@
 }
 
 .pro-sidebar {
-  border-right: 0.5px solid grey;
+  border-right: 0.5px solid $grey;
   height: 100 !important;
 }
 
@@ -48,4 +51,29 @@
 }
 .ais-SearchBox-reset {
   display: none;
+}
+
+
+// overriding bootstrap 
+
+.btn-secondary {
+  background-color: $grey;
+  border-color: $grey;
+  &:hover {
+    border-color: $gold;
+    background-color: $gold;
+  }
+}
+
+hr {
+  background-color: $grey 
+}
+
+.border {
+  border-color: $grey !important;
+  
+}
+
+.text-muted {
+  color: $grey !important
 }

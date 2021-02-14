@@ -8,9 +8,8 @@ import { FaShoppingCart, FaSnowflake } from "react-icons/fa";
 import { client } from "../../../contentful.client";
 import { useRouter } from "next/router";
 import VariantSelect from "../../../components/product/VariantSelect.component";
-import { showSFPricing, numberWithCommas } from "../../../helper";
 import { FilterContext } from "../../../context/filterbar.context";
-
+import PriceBlock from "../../../components/product/PriceBlock.component";
 export default function Product({ data: { product }, loading }) {
   const router = useRouter();
   const [selected, setSelected] = useState(router.query.id);
@@ -73,18 +72,17 @@ export default function Product({ data: { product }, loading }) {
           {/* Image + description on the left half */}
           <div className="col-md">
             <HandleImage productImage={productImage} />
-            {/* Image Component Goes Here */}
           </div>
 
           {/* The rest of the product info goes here. */}
           <div className="col-md">
             {/* Product Name */}
             <div className="d-flex justify-content-between align-items-start">
-              <h2 style={{ fontSize: "1.8em" }}>{name}</h2>
+              <h2 className="product-page-name">{name}</h2>
               {/* Frost Proof */}
               <span>
                 {frostProof ? (
-                  <button className="btn d-flex" style={{ color: "lightblue" }}>
+                  <button className="btn d-flex frost-proof-icon">
                     <FaSnowflake />
                   </button>
                 ) : null}
@@ -92,56 +90,14 @@ export default function Product({ data: { product }, loading }) {
             </div>
 
             {/* Product Type (eg. "Hand Painted Terracto Tile") */}
-            <span>
+            <span className="product-page-material text-muted">
               <h6>
                 <em>{material + " " + productType}</em>
               </h6>
             </span>
             <hr></hr>
 
-            {/* Price Block */}
-            <div className="mb-3">
-              <div className="d-flex flex-column">
-                {soldByThe === "box" || soldByThe === "pc" ? (
-                  <div className="d-flex">
-                    <span className="font-weight-bold">
-                      $ {showSFPricing(product)}
-                    </span>
-                    <p className="pl-2 mb-0 text-muted font-italic">/ sf</p>
-                  </div>
-                ) : null}
-                <div className="d-flex">
-                  <div className="d-flex">
-                    <span className="font-weight-bold">
-                      $ {numberWithCommas(price)}
-                    </span>
-                    <p className="pl-2 mb-0 text-muted font-italic">
-                      / {soldByThe}
-                    </p>
-                  </div>
-
-                  <div className="d-flex pl-2">
-                    {soldByThe === "sf" || soldByThe === "pc" ? (
-                      <span className="d-flex">
-                        ({squareFootPerPiece}
-                        <p className="pl-2 mb-0 text-muted font-italic">
-                          sf / pc
-                        </p>
-                        )
-                      </span>
-                    ) : (
-                      <span className="d-flex">
-                        ({squareFootPerBox}
-                        <p className="pl-2 mb-0 text-muted font-italic">
-                          sf / box
-                        </p>
-                        )
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
+            <PriceBlock product={product} />
 
             <div
               className={`d-flex justify-content-between ${
@@ -185,6 +141,7 @@ export default function Product({ data: { product }, loading }) {
                     : price / squareFootPerBox
                 }
               />
+
               {variantsCollection.items.length !== 0 ? (
                 <VariantSelect
                   product={product}
@@ -204,7 +161,7 @@ export default function Product({ data: { product }, loading }) {
             />
 
             <div className="mt-4 d-flex justify-content-between">
-              <button className=" btn btn-info">order a sample</button>
+              <button className=" btn btn-secondary">order a sample</button>
               <div className=" d-flex border justify-content-between align-items-center p-0">
                 <button
                   className="btn mr-0 ml-0"
@@ -222,7 +179,7 @@ export default function Product({ data: { product }, loading }) {
               </div>
 
               <button
-                className="btn btn-success snipcart-add-item "
+                className="btn btn-secondary snipcart-add-item "
                 data-item-id={router.query.id}
                 data-item-image={product.productImage[0].url}
                 data-item-name={product.name}

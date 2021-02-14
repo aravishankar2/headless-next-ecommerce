@@ -20,7 +20,7 @@ const options = {
 
 const ImageSlider = ({ data }) => {
   const [current, setCurrent] = useState(0);
-
+  
   if (!Array.isArray(data) || data.length <= 0) {
     return null;
   }
@@ -60,7 +60,7 @@ const ImageSlider = ({ data }) => {
             <div key={index} className="w-25">
               <div
                 className={`grid-item m-0  ${
-                  index === current ? "selected-image" : ""
+                  index === current ? "border" : ""
                 }`}
               >
                 <Image
@@ -92,7 +92,6 @@ const HandleImage = ({ productImage }) => {
         <div>
           <SRLWrapper options={options}>
             <Image
-              key={index}
               src={productImage[0].public_id}
               layout="responsive"
               width={200}

@@ -130,7 +130,7 @@ export function Calculator({
               ? () => setQty(Math.round(totalPCS))
               : () => setQty(Math.round(totalSF))
           }
-          className="btn btn-primary mb-4"
+          className="btn btn-secondary mb-4"
         >
           Update Quantity
         </button>
