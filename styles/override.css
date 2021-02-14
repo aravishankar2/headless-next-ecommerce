@@ -1,0 +1,51 @@
+/* overriding react-pro-sidebar styles */
+.pro-sidebar.collapsed {
+  width: 0px !important;
+  min-width: 0px !important;
+}
+
+.pro-sidebar > .pro-sidebar-inner {
+  background: white !important;
+}
+
+.pro-sidebar {
+  border-right: 0.5px solid grey;
+  height: 100 !important;
+}
+
+.pro-sidebar
+  .pro-menu.shaped
+  .pro-menu-item
+  > .pro-inner-item
+  > .pro-icon-wrapper {
+  background: white !important;
+}
+.pro-sidebar .pro-menu > ul > .pro-sub-menu > .pro-inner-list-item {
+  background: white !important;
+}
+
+/* overriding react-instantsearch default styles */
+.ais-Hits-item {
+  list-style: none;
+}
+.ais-SearchBox-input {
+  width: 100%;
+  height: 2em;
+}
+
+.ais-SearchBox-form {
+  margin-top: 30px;
+  display: flex;
+}
+
+.ais-Hits-list {
+  display: inline;
+  margin-top: 0px;
+}
+
+.ais-SearchBox-submit {
+  display: none;
+}
+.ais-SearchBox-reset {
+  display: none;
+}

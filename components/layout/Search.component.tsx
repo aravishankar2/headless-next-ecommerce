@@ -64,7 +64,9 @@ const Search = () => {
           <SearchBox />
           <Hits hitComponent={Hit} />
         </InstantSearch>
+        <img src="./search-by-algolia-light-background.svg" className="float-right" style={{width: '130px'}}/>
       </div>
+      
     </div>
   );
 };

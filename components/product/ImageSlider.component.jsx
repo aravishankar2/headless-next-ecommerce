@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { SRLWrapper } from "simple-react-lightbox";
-import { ProductImage } from "../../interfaces/ProductImage";
 const options = {
   settings: {},
   caption: {
@@ -32,13 +31,12 @@ const ImageSlider = ({ data }) => {
           <div
             className={index === current ? "slide active" : "slide"}
             key={index}
-            style={{ height: "100%", width: "100%" }}
           >
             {index === current && (
               <div>
                 <SRLWrapper options={options}>
                   <Image
-                    key={public_id}
+                    key={index}
                     src={public_id}
                     layout="responsive"
                     width={100}
@@ -56,7 +54,7 @@ const ImageSlider = ({ data }) => {
         );
       })}
 
-      <div className="d-flex flex-wrap mt-4 w-100">
+      <div className="d-flex flex-wrap mt-4 mb-3 w-100 grid-container">
         {data.map(({ public_id }, index) => {
           return (
             <div key={index} className="w-25">
@@ -69,7 +67,7 @@ const ImageSlider = ({ data }) => {
                   onClick={() => {
                     setCurrent(index);
                   }}
-                  key={public_id}
+                  key={index}
                   src={public_id}
                   layout="responsive"
                   width={100}
@@ -85,8 +83,6 @@ const ImageSlider = ({ data }) => {
   );
 };
 
-
-
 const HandleImage = ({ productImage }) => {
   return productImage ? (
     <div>
@@ -96,7 +92,7 @@ const HandleImage = ({ productImage }) => {
         <div>
           <SRLWrapper options={options}>
             <Image
-              key={productImage[0].public_id}
+              key={index}
               src={productImage[0].public_id}
               layout="responsive"
               width={200}
