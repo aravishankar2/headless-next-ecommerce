@@ -1,7 +1,8 @@
 import algoliasearch from "algoliasearch/lite";
 import { InstantSearch, SearchBox, Hits } from "react-instantsearch-dom";
 import Link from "next/link";
-import { ProductImage } from "../../interfaces/ProductImage";
+import { ProductImage } from "../../../interfaces/ProductImage";
+import styles from "./search.module.scss"
 
 const searchClient = algoliasearch(
   "Q7XICK98SI",
@@ -32,12 +33,11 @@ export interface Hit {
 const Hit = ({ hit }: Hit) => (
   <div
     className="d-flex pr-3 pt-3 pb-3 align-items-center"
-    style={{ cursor: "pointer" }}
   >
     <Link href={`/shop/product/${hit.sys.id}`}>
       <img
         src={hit.fields.productImage["en-US"][0].url}
-        style={{ width: "10%" }}
+        className={`${styles.hitimage} pointer`}
       />
     </Link>
     <div>
@@ -64,10 +64,12 @@ const Search = () => {
           <SearchBox />
           <Hits hitComponent={Hit} />
         </InstantSearch>
-        <img src="https://res.cloudinary.com/surface-group/image/upload/v1613271155/search-by-algolia-light-background_jamw6m.svg" className="float-right" style={{width: '100px'}}/>
-
+        <img
+          src="https://res.cloudinary.com/surface-group/image/upload/v1613271155/search-by-algolia-light-background_jamw6m.svg"
+          className={`float-right ${styles.algoliabranding}`}
+          
+        />
       </div>
-
     </div>
   );
 };

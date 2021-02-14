@@ -1,5 +1,5 @@
 import { AriaAttributes, DOMAttributes } from "react";
-import Hit from "./components/layout/Search.component";
+import Hit from "./components/layout/SearchBar/Search.component";
 import { Product } from "./interfaces/Product";
 
 declare module 'react' {

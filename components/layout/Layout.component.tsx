@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import Nav from "./Nav.component";
 import Head from "next/head";
-import Search from "./Search.component";
+import Search from "./SearchBar/Search.component";
 import { FilterContext } from "../../context/filterbar.context";
 import { IProps } from "../../interfaces/iProps";
 

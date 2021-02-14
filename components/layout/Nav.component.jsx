@@ -10,7 +10,7 @@ const Nav = () => {
   } = useContext(ParamsContext);
   return (
     <>
-      <Navbar bg="light" expand="sm">
+      <Navbar expand="sm">
         <div className="container d-flex justify-content-between align-items-center">
           <div className="d-flex align-items-center">
             <Navbar.Brand href={`/shop/?limit=${limit}`}>

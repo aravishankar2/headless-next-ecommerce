@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import VariantSelect from "../../../components/product/VariantSelect.component";
 import { FilterContext } from "../../../context/filterbar.context";
 import PriceBlock from "../../../components/product/PriceBlock.component";
+
 export default function Product({ data: { product }, loading }) {
   const router = useRouter();
   const [selected, setSelected] = useState(router.query.id);
@@ -21,7 +22,6 @@ export default function Product({ data: { product }, loading }) {
   useEffect(() => {
     (() => {
       let arr = product.variantsCollection.items.map(({ sys: { id } }) => id);
-
       client
         .getEntries({
           content_type: "product",

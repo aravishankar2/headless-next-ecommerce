@@ -19,13 +19,8 @@ const ProductCard = ({ product }: ProductProps) => {
             width={200}
             height={200}
           />
-          <div
-            className="mt-1"
-            style={{ fontSize: "0.9rem", lineHeight: "1em" }}
-          >
-            {product.name}
-          </div>
-          <div className="text-muted" style={{ fontSize: "0.8rem" }}>
+          <div className="mt-1 grid-item-name">{product.name}</div>
+          <div className="text-muted grid-item-price">
             ${showSFPricing(product)} / sf
           </div>
         </div>

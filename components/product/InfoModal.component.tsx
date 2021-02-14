@@ -3,7 +3,7 @@ import { Modal, Container, Row, Col, Button } from "react-bootstrap";
 import { checkIfValsThere, round, numberWithCommas } from "../../helper";
 import { Product } from "../../interfaces/Product";
 
-interface Props {
+type Props = {
   product: Product;
   pricePerBox: number;
   pricePerPiece: number;
@@ -25,10 +25,10 @@ export function InfoModal(props: Props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="show-grid">
-        <Container style={{ fontSize: "14px", lineHeight: "17px" }}>
+        <Container>
           <Row>
             <Col xs={12} sm={4} md={4}>
-              <div className=" p-3 m-1">
+              <div className="p-3 m-1">
                 <div>material:</div>{" "}
                 <div className="text-muted font-italic">
                   {props.product.material.toLowerCase()}
@@ -36,7 +36,7 @@ export function InfoModal(props: Props) {
               </div>
             </Col>
             <Col xs={12} sm={4} md={4}>
-              <div className=" p-3 m-1">
+              <div className="p-3 m-1">
                 <div>weight:</div>{" "}
                 <div className="text-muted font-italic">
                   {props.product.weight} lbs
