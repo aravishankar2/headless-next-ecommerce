@@ -1,4 +1,9 @@
 import React from "react";
+import Banner from "../components/home/Banner.component";
 export default function Home() {
-  return <div></div>;
+  return (
+    <div>
+      <Banner />
+    </div>
+  );
 }

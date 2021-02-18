@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import VariantSelect from "../../../components/product/VariantSelect.component";
 import { FilterContext } from "../../../context/filterbar.context";
 import PriceBlock from "../../../components/product/PriceBlock.component";
+import { NextSeo } from "next-seo";
 
 export default function Product({ data: { product }, loading }) {
   const router = useRouter();
@@ -52,6 +53,7 @@ export default function Product({ data: { product }, loading }) {
   let {
     productImage,
     name,
+    description,
     frostProof,
     soldByThe,
     material,
@@ -65,6 +67,23 @@ export default function Product({ data: { product }, loading }) {
 
   return (
     <div className="container mt-4">
+      <NextSeo
+        title={name}
+        description={description}
+        openGraph={{
+          url: 'https://flamboyant-mcclintock-010ddc.netlify.app/shop/',
+          title: {name},
+          description: {description},
+          images: [
+            {
+              url: productImage[0].url,
+              width: 650,
+              height: 650,
+              alt: 'product-image',
+            },
+          ],
+        }}
+      />
       {loading ? (
         <div>...loading</div>
       ) : (

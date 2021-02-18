@@ -9,7 +9,7 @@ const Layout = (props: IProps) => {
   const { state } = useContext(FilterContext);
 
   return (
-    <div>
+    <div onClick={() => console.log(props)}>
       <Head>
         {/* Version 2 of Snipcart */}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
