@@ -1,5 +1,4 @@
-@import './_variables.scss';
-
+@import "./_variables.scss";
 
 /* overriding react-pro-sidebar styles */
 .pro-sidebar.collapsed {
@@ -53,8 +52,11 @@
   display: none;
 }
 
+.pro-sidebar .pro-menu > ul > .pro-sub-menu > .pro-inner-list-item > div > ul {
+  padding-top: 0px !important;
+}
 
-// overriding bootstrap 
+// overriding bootstrap
 
 .btn-secondary {
   background-color: $grey;
@@ -66,14 +68,13 @@
 }
 
 hr {
-  background-color: $grey 
+  background-color: $grey;
 }
 
 .border {
   border-color: $grey !important;
-  
 }
 
 .text-muted {
-  color: $grey !important
+  color: $grey !important;
 }

@@ -4,6 +4,7 @@ import ProductCard from "../../components/shop/ProductCard.component";
 import FilterBar from "../../components/shop/FilterBar.component";
 import { ParamsContext } from "../../context/params.context";
 import { useRouter } from "next/router";
+import { NextSeo } from "next-seo";
 
 export default function Shop({
   data: {
@@ -42,6 +43,22 @@ export default function Shop({
 
   return (
     <>
+    <NextSeo
+        title="shop"
+        openGraph={{
+        url: `https://flamboyant-mcclintock-010ddc.netlify.app${router.asPath}`,
+          title: "Surface Group - Shop",
+          locale: 'en_US',
+          images: [
+            {
+              url: "https://cdn.shopify.com/s/files/1/0265/0039/9213/files/logo-w-bordere.png?v=1613663816",
+              width: 400,
+              height: 400,
+              alt: 'product-image',
+            },
+          ],
+        }}
+      />
       <div className="container">
         {/* {" "}
         <Form>

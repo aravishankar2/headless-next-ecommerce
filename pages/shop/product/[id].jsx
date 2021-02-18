@@ -71,6 +71,7 @@ export default function Product({ data: { product }, loading }) {
         openGraph={{
           url: `https://flamboyant-mcclintock-010ddc.netlify.app/shop/product/${router.query.id}`,
           title: name,
+          locale: 'en_US',
           images: [
             {
               url: productImage[0].url,
