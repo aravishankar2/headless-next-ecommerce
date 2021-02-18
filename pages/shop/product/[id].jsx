@@ -53,7 +53,6 @@ export default function Product({ data: { product }, loading }) {
   let {
     productImage,
     name,
-    description,
     frostProof,
     soldByThe,
     material,
@@ -69,11 +68,9 @@ export default function Product({ data: { product }, loading }) {
     <div className="container mt-4">
       <NextSeo
         title={name}
-        description={description}
         openGraph={{
-          url: 'https://flamboyant-mcclintock-010ddc.netlify.app/shop/',
-          title: {name},
-          description: {description},
+          url: `https://flamboyant-mcclintock-010ddc.netlify.app/shop/product/${router.query.id}`,
+          title: name,
           images: [
             {
               url: productImage[0].url,
