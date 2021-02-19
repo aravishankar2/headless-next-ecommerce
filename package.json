@@ -29,6 +29,7 @@
     "react-dom": "17.0.1",
     "react-icons": "^4.1.0",
     "react-instantsearch-dom": "^6.9.0",
+    "react-parallax": "^3.2.0",
     "react-pro-sidebar": "^0.5.0",
     "sass": "^1.32.7",
     "simple-react-lightbox": "^3.6.3"

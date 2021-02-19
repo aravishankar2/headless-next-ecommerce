@@ -3,8 +3,10 @@ import { useState, useEffect, useRef, useContext } from "react";
 import ProductCard from "../../components/shop/ProductCard.component";
 import FilterBar from "../../components/shop/FilterBar.component";
 import { ParamsContext } from "../../context/params.context";
+import { FilterContext } from "../../context/filterbar.context";
 import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
+import { Form } from "react-bootstrap";
 
 export default function Shop({
   data: {
@@ -16,10 +18,10 @@ export default function Shop({
   const isInitialMount = useRef(true);
 
   const { state } = useContext(ParamsContext);
-  // const {
-  //   state: { opened },
-  //   dispatch: filterDispatch,
-  // } = useContext(FilterContext);
+  const {
+    state: { opened },
+    dispatch: filterDispatch,
+  } = useContext(FilterContext);
   const router = useRouter();
   useEffect(() => {
     setAllProducts(products);
@@ -43,38 +45,25 @@ export default function Shop({
 
   return (
     <>
-    <NextSeo
+      <NextSeo
         title="shop"
         openGraph={{
-        url: `https://flamboyant-mcclintock-010ddc.netlify.app${router.asPath}`,
+          url: `https://flamboyant-mcclintock-010ddc.netlify.app${router.asPath}`,
           title: "Surface Group - Shop",
-          locale: 'en_US',
+          locale: "en_US",
           images: [
             {
-              url: "https://cdn.shopify.com/s/files/1/0265/0039/9213/files/logo-w-bordere.png?v=1613663816",
+              url:
+                "https://cdn.shopify.com/s/files/1/0265/0039/9213/files/logo-w-bordere.png?v=1613663816",
               width: 400,
               height: 400,
-              alt: 'product-image',
+              alt: "product-image",
             },
           ],
         }}
       />
       <div className="container">
-        {/* {" "}
-        <Form>
-          <Form.Check
-            onChange={() => {
-              filterDispatch({
-                type: "TOGGLE_OPEN",
-                payload: !opened,
-              });
-            }}
-            checked={opened}
-            type="switch"
-            id="custom-switch"
-            label={opened ? "hide filter bar" : "show filter bar"}
-          />
-        </Form> */}
+       
       </div>
       <div className="d-flex">
         <div>
@@ -99,8 +88,6 @@ export default function Shop({
     </>
   );
 }
-
-
 
 Shop.getInitialProps = async (ctx) => {
   const {

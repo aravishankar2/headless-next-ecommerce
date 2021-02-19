@@ -1,9 +1,11 @@
 import React from "react";
-import Banner from "../components/home/Banner.component";
+import HomeParallax from '../components/home/Parallax.component'
+import ThreeValues from '../components/home/ThreeValues.component'
 export default function Home() {
   return (
     <div>
-      {/* <Banner /> */}
+      <HomeParallax />
+      <ThreeValues />
     </div>
   );
 }

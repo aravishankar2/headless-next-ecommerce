@@ -58,7 +58,7 @@ const Hit = ({ hit }: Hit) => (
 
 const Search = () => {
   return (
-    <div className="w-100 border-bottom pb-4">
+    <div className={`w-100 border-bottom pb-4 position-absolute ${styles.searchbar}`}>
       <div className="container">
         <InstantSearch indexName="dev_ECOMMERCE" searchClient={searchClient}>
           <SearchBox />

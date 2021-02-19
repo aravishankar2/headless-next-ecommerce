@@ -1,8 +1,14 @@
 @import "../../../variables";
 
+.searchbar {
+  z-index: 1000000;
+  background-color: white;
+}
+
 .hitimage {
   width: 10%;
 }
+
 
 .algoliabranding {
   width: 100px

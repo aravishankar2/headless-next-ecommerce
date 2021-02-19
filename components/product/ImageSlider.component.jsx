@@ -1,26 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { SRLWrapper } from "simple-react-lightbox";
-const options = {
-  settings: {},
-  caption: {
-    showCaption: false,
-  },
-  buttons: {
-    showNextButton: false,
-    showPrevButton: false,
-    showThumbnailsButton: false,
-    showAutoplayButton: false,
-  },
-  thumbnails: {
-    showThumbnails: false,
-  },
-  progressBar: {},
-};
+import options from "./ImageSliderOptions";
 
 const ImageSlider = ({ data }) => {
   const [current, setCurrent] = useState(0);
-  
   if (!Array.isArray(data) || data.length <= 0) {
     return null;
   }
@@ -67,6 +51,7 @@ const ImageSlider = ({ data }) => {
                   onClick={() => {
                     setCurrent(index);
                   }}
+                  tabIndex={index}
                   key={index}
                   src={public_id}
                   layout="responsive"

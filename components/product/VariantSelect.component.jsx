@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useContext } from "react";
+import React, { useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 
 export default function VariantSelect({
@@ -33,8 +33,8 @@ export default function VariantSelect({
         <option value={router.query.id} disabled>
           {product.name}
         </option>
-        {options.map((item) => (
-          <option key={item.sys.id} value={item.sys.id}>
+        {options.map((item, i) => (
+          <option key={i} value={item.sys.id}>
             {item.fields.name}
           </option>
         ))}

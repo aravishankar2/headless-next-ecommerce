@@ -1,5 +1,27 @@
 @import "./_variables.scss";
 
+@font-face {
+  font-family: "TexGyrePagella";
+  src: url("/fonts/texgyrepagella/texgyrepagella-regular-webfont.ttf");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+.logo-text {
+  font-family: TexGyrePagella;
+  line-height: 1;
+  .sg {
+    color: #585759;
+    font-size: 1.6em;
+  }
+  .i {
+    color: #98999d;
+    // font-size: 0.95em;
+    letter-spacing: 0.39em;
+  }
+}
+
 a {
   color: inherit;
   text-decoration: none;

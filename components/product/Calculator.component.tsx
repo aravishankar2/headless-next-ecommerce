@@ -132,7 +132,7 @@ export function Calculator({
           }
           className="btn btn-secondary mb-4"
         >
-          Update Quantity
+          update quantity
         </button>
       </div>
     </div>
