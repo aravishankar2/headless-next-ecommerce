@@ -1,0 +1,89 @@
+@import "../../variables";
+
+.nav {
+  padding: 1rem;
+  color: $grey;
+  .cheeseburger {
+    display: none;
+  }
+  border-bottom: 1px solid $grey;
+}
+
+.navlinks {
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  grid-gap: 10px;
+  list-style: none;
+  text-align: center;
+  width: 70vw;
+  justify-content: flex-end;
+
+  li {
+    &:hover {
+      color: $gold;
+      transition: all 0.2s ease-out;
+    }
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .nav {
+    position: relative;
+  }
+
+  .searchcarticons {
+    position: absolute;
+    right: 0;
+    margin-right: 3rem;
+  }
+  .navlinks {
+    li {
+      padding: 1rem;
+    }
+    display: flex;
+    z-index: 10000;
+    background-color: white;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: 75px;
+    left: -100%;
+    opacity: 1;
+    transition: all 0.5s ease-in-out;
+  }
+  .navlinks.active {
+    background-color: white;
+    left: 0;
+    opacity: 1;
+    border-bottom: 1px solid $grey;
+    transition: all 0.5s ease-in-out;
+  }
+  .cheeseburger {
+    display: block !important;
+    position: absolute;
+    right: 0;
+    div {
+      &:hover {
+        span {
+          background: $gold !important;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .nav {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .searchcarticons {
+    position: relative;
+    margin-right: 0;
+    margin-top: 1em;
+  }
+
+  .navlinks {
+    top: 115px;
+  }
+}
