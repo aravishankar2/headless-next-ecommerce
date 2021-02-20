@@ -2,7 +2,7 @@ import { useReducer, createContext } from "react";
 // import { params } from "./reducer/params";
 import { IProps } from "../interfaces/iProps";
 const initialState = {
-  limit: "20",
+  limit: "10",
   material: "",
   soldByThe: "",
   finish: "",
@@ -46,6 +46,8 @@ const params: React.Reducer<State, Action> = (state, action) => {
       return { ...state, limit: action.payload };
     case "ORDER":
       return { ...state, order: action.payload };
+    case "RESET":
+      return { ...initialState };
     default:
       return state;
   }

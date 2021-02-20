@@ -62,10 +62,24 @@ export default function Shop({
           ],
         }}
       />
-      <div className="container">
-       
+      <div className="container-fluid">
+               {" "}	
+        <Form>	
+          <Form.Check	
+            onChange={() => {	
+              filterDispatch({	
+                type: "TOGGLE_OPEN",	
+                payload: !opened,	
+              });	
+            }}	
+            checked={opened}	
+            type="switch"	
+            id="custom-switch"	
+            label={opened ? "hide filter bar" : "show filter bar"}	
+          />	
+        </Form>
       </div>
-      <div className="d-flex">
+      <div className="d-flex border-top">
         <div>
           <FilterBar
             total={total}

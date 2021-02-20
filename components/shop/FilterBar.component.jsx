@@ -164,6 +164,7 @@ const FilterBar = ({ total, allProducts, setAllProducts }) => {
         <SubMenu title="Frost Proof" icon={<FaSnowflake />}>
           <MenuItem>
             <Form.Check
+              checked={!state.frostProof}
               onChange={() => {
                 dispatch({
                   type: "FROST_PROOF",
@@ -316,7 +317,7 @@ const FilterBar = ({ total, allProducts, setAllProducts }) => {
             Concrete
           </MenuItem>
         </SubMenu>
-        <div className="w-100 d-flex justify-content-center">
+        <div className="container w-100 d-flex justify-content-between">
           <Button
             className="mt-5 mb-5 btn btn-secondary"
             onClick={() =>
@@ -328,6 +329,16 @@ const FilterBar = ({ total, allProducts, setAllProducts }) => {
             disabled={total <= state.limit}
           >
             Load More
+          </Button>
+          <Button
+            className="mt-5 mb-5 btn btn-secondary"
+            onClick={() =>
+              dispatch({
+                type: "RESET",
+              })
+            }
+          >
+           Reset Filter
           </Button>
         </div>
       </Menu>
