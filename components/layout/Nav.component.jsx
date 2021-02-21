@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { FaShoppingCart, FaSearch, FaTimes } from "react-icons/fa";
 import { FilterContext } from "../../context/filterbar.context.tsx";
 import { ParamsContext } from "../../context/params.context.tsx";
-import Image from "next/image";
 import NavLogo from "./NavLogo.component";
 import styles from "./Nav.module.scss";
 import Cheeseburger from "./Cheeseburger.component";
@@ -18,10 +17,21 @@ const Nav = () => {
     <nav
       className={`d-flex justify-content-center align-items-center ${styles.nav}`}
     >
-      <NavLogo />
+      <div
+        onClick={() => {
+          router.push("/");
+          setOpen(false);
+          dispatch({
+            type: "TOGGLE_SEARCH",
+            payload: false,
+          });
+        }}
+      >
+        <NavLogo />
+      </div>
 
       <ul
-        className={`${styles.navlinks} m-0 ${
+        className={`${styles.navlinks} mr-5 ${
           open ? styles.active : styles.navlinks
         }`}
       >
@@ -54,12 +64,21 @@ const Nav = () => {
         </li>
         <li
           onClick={() => {
-            router.push("/");
+            router.push("https://online.flipbuilder.com/vevp/wctq/");
             setOpen(false);
           }}
           className="pointer"
         >
           lookbook
+        </li>
+        <li
+          onClick={() => {
+            router.push("/");
+            setOpen(false);
+          }}
+          className="pointer"
+        >
+          social
         </li>
       </ul>
 
@@ -72,7 +91,7 @@ const Nav = () => {
                   type: "TOGGLE_SEARCH",
                   payload: true,
                 });
-                setOpen(false)
+                setOpen(false);
               }}
             />
           ) : (
@@ -88,12 +107,17 @@ const Nav = () => {
         </div>
 
         <div
-          onClick={() =>
+          onClick={() => {
             dispatch({
               type: "TOGGLE_OPEN",
               payload: false,
-            })
-          }
+            });
+            setOpen(false);
+            dispatch({
+              type: "TOGGLE_SEARCH",
+              payload: false,
+            });
+          }}
         >
           <a
             className={`snipcart-checkout snipcart-summary ${styles.carticon}`}
@@ -109,66 +133,6 @@ const Nav = () => {
       </div>
 
       <Cheeseburger setOpen={setOpen} open={open} />
-
-      {/* <div className="d-flex">
-        <div className="links d-flex mr-5">
-          <div className="home pointer" onClick={() => router.push("/")}>
-            home
-          </div>
-          <div
-            className="lookbook pointer ml-3"
-            onClick={() => router.push("/")}
-          >
-            lookbook
-          </div>
-          <div
-            className="shop ml-3 pointer"
-            onClick={() => router.push(`/shop?limit=${limit}`)}
-          >
-            shop
-          </div>
-        </div>
-
-        <div className="mr-3 pointer">
-          {!state.searchOpened ? (
-            <FaSearch
-              onClick={() => {
-                dispatch({
-                  type: "TOGGLE_SEARCH",
-                  payload: true,
-                });
-              }}
-            />
-          ) : (
-            <FaTimes
-              onClick={() => {
-                dispatch({
-                  type: "TOGGLE_SEARCH",
-                  payload: false,
-                });
-              }}
-            />
-          )}
-        </div>
-
-        <div
-          onClick={() =>
-            dispatch({
-              type: "TOGGLE_OPEN",
-              payload: false,
-            })
-          }
-        >
-          <a className="snipcart-checkout snipcart-summary">
-            <div className="d-flex justify-content-between align-items-center">
-              <span className="mr-2">
-                <FaShoppingCart />
-              </span>{" "}
-              <small className="snipcart-total-price">$0.00</small>
-            </div>
-          </a>
-        </div>
-      </div> */}
     </nav>
   );
 };

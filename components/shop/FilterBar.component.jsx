@@ -323,7 +323,7 @@ const FilterBar = ({ total, allProducts, setAllProducts }) => {
             onClick={() =>
               dispatch({
                 type: "LOAD_MORE",
-                payload: parseInt(state.limit) + 20,
+                payload: parseInt(state.limit) + 10,
               })
             }
             disabled={total <= state.limit}
@@ -338,7 +338,7 @@ const FilterBar = ({ total, allProducts, setAllProducts }) => {
               })
             }
           >
-           Reset Filter
+            Reset Filter
           </Button>
         </div>
       </Menu>

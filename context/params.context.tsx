@@ -2,7 +2,7 @@ import { useReducer, createContext } from "react";
 // import { params } from "./reducer/params";
 import { IProps } from "../interfaces/iProps";
 const initialState = {
-  limit: "10",
+  limit: "20",
   material: "",
   soldByThe: "",
   finish: "",

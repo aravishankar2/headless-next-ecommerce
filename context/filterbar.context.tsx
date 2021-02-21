@@ -2,7 +2,7 @@ import { useReducer, createContext } from "react";
 import { IProps } from "../interfaces/iProps";
 
 const initialState = {
-  opened: true,
+  opened: false,
   searchOpened: false,
 };
 
