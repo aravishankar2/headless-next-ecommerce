@@ -1,10 +1,9 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
-import { FaTruckLoading, spark, FaTimes } from "react-icons/fa";
 import Image from "next/image";
 const ThreeValues = () => {
   return (
-    <Row className="p-5">
+    <Row className="mr-0 ml-0 p-3">
       <Col
         sm="4"
         className=" d-flex flex-column justify-content-center align-items-center"
