@@ -39,12 +39,6 @@
 }
 
 .animatingblock {
-  margin-left: 3rem;
-}
-
-@media screen and (max-width: 924px) {
-  .animatingblock {
-    text-align: center;
-    margin-left: 0;
-  }
+  text-align: center;
+  margin-left: 0;
 }

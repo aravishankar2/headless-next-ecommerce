@@ -53,7 +53,7 @@ const Nav = () => {
         >
           shop
         </li>
-        <li
+        {/* <li
           onClick={() => {
             router.push("/");
             setOpen(false);
@@ -61,7 +61,7 @@ const Nav = () => {
           className="pointer"
         >
           blog
-        </li>
+        </li> */}
         <li
           onClick={() => {
             router.push("https://online.flipbuilder.com/vevp/wctq/");

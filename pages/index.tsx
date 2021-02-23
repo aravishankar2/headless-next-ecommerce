@@ -1,6 +1,7 @@
 import React from "react";
 import HomeParallax from "../components/home/Parallax.component";
 import ThreeValues from "../components/home/ThreeValues.component";
+import ContactForm from "../components/home/Contact.component";
 import WipeSlider from "../components/home/WipeSlider.component";
 import styles from "../components/home/WipeSlider.module.scss";
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
         </div>
       </div>
       <ThreeValues />
+      <ContactForm />
     </div>
   );
 }
