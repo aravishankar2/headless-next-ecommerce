@@ -1,6 +1,5 @@
 import React from "react";
 import { Parallax } from "react-parallax";
-import { Row, Col } from "react-bootstrap";
 
 const HomeParallax = () => {
   const image1 =

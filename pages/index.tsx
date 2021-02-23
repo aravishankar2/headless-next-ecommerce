@@ -5,7 +5,7 @@ import WipeSlider from "../components/home/WipeSlider.component";
 import styles from "../components/home/WipeSlider.module.scss";
 export default function Home() {
   return (
-    <div>
+    <div className="bg">
       <HomeParallax />
       <div className={`mt-4 ${styles.animatingblock}`}>
         <div className={`${styles.content}`}>
