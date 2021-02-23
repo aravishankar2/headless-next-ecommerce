@@ -1,0 +1,50 @@
+@import "../../_variables.scss";
+
+.content {
+  flex: 1;
+  color: $grey;
+  @include screen("tablet") {
+    max-width: 100%;
+  }
+  h1 {
+    margin-top: 12px;
+    margin-bottom: 20px;
+
+    .role_name {
+      display: inline-block;
+
+      &:before,
+      .wipe_anim {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -15px;
+        height: 1.2em;
+        width: calc(var(--width, 0) * 1px + 0.5em);
+        transform: skew(-20deg);
+        background-color: white;
+        transition: width 0.1s;
+      }
+
+      &:before {
+        z-index: -1;
+      }
+
+      .wipe_anim {
+        transform: scaleX(0);
+        background-color: $gold;
+      }
+    }
+  }
+}
+
+.animatingblock {
+  margin-left: 3rem;
+}
+
+@media screen and (max-width: 600px) {
+  .animatingblock {
+    text-align: center;
+    margin-left: 0;
+  }
+}

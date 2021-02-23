@@ -1,11 +1,64 @@
 @import "./_variables.scss";
 
+* {
+  box-sizing: border-box;
+  position: relative;
+}
+
+h1 {
+  font-size: 44px;
+  @include screen('tablet') {
+    font-size: $h1;
+  }
+}
+h2 {
+  font-size: $h3;
+
+  @include screen('tablet') {
+    font-size: $h2;
+  }
+}
+h3 {
+  font-size: $h4;
+
+  @include screen('tablet') {
+    font-size: $h3;
+  }
+}
+
+.parallax {
+  border-bottom: 1px solid $gold;
+}
+
+
 @font-face {
   font-family: "TexGyrePagella";
   src: url("/fonts/texgyrepagella/texgyrepagella-regular-webfont.ttf");
   font-style: normal;
   font-weight: 400;
   font-display: swap;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+.container-center {
+  min-height: 100vh;
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.frost-proof-icon {
+  color: lightblue;
+  &:hover {
+    color: $gold;
+  }
 }
 
 .logo-text {
@@ -21,42 +74,16 @@
   }
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
-}
-
 .pointer {
   cursor: pointer;
 }
 
-.container-center {
-  min-height: 100vh;
-  padding: 0 0.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+// Shop Page Product Grid + Product Pages Thumbnails
+.three-values-container {
+  border-top: 1px solid $gold;
+  border-bottom: 1px solid $gold;
+  color: $grey;
 }
-
-.product-page-name {
-  font-size: 1.8em;
-  padding: -10;
-  margin-top: -0.26em !important;
-}
-
-.frost-proof-icon {
-  color: lightblue;
-  &:hover {
-    color: $gold;
-  }
-}
-
-// Shop Page: Product Grid
 .grid-container {
   display: grid;
   width: 100%;
@@ -78,3 +105,4 @@ a {
     }
   }
 }
+

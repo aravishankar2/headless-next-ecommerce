@@ -50,12 +50,29 @@ export function Calculator({
     // pieces per sf * total sf = total pieces
     setTotalPCS((1 / squareFootPerPiece) * totalSF);
     // total pieces / pieces per box = boxes needed
-    //IMPORTANT: This relys on a field that is potentially not there. You may need to recalc using different values
     setBoxesNeeded(sfNeeded / product.squareFootPerBox);
   }, [sfNeeded, totalSF, totalPCS, overage]);
 
   return (
-    <div className="container-fluid d-flex flex-column align-items-between justify-content-between border">
+    <form
+      onSubmit={
+        product.soldByThe === "box"
+          ? (e) => {
+              e.preventDefault();
+              setQty(Math.round(boxesNeeded));
+            }
+          : product.soldByThe === "pc"
+          ? (e) => {
+              e.preventDefault();
+              setQty(Math.round(totalPCS));
+            }
+          : (e) => {
+              e.preventDefault();
+              setQty(Math.round(totalSF));
+            }
+      }
+      className="container-fluid d-flex flex-column align-items-between justify-content-between border"
+    >
       <div className="h-50 row d-flex align-items-between justify-content-between">
         <div className="container-fluid h-100">
           <div className="row h-100">
@@ -64,17 +81,22 @@ export function Calculator({
 
               <input
                 min="0"
+                aria-label="enter sf needed"
                 onChange={handleChangeInput}
                 placeholder={`${squareFootPerBox} sf minimum required`}
                 value={sfNeeded}
                 type="number"
                 className="form-control"
-              ></input>
+              />
             </div>
             <div className="col-4 mt-2 d-flex align-items-end flex-column justify-content-center">
               <div>
                 <label>overage</label>
-                <select onChange={handleChangeOverage} className="form-control">
+                <select
+                  aria-label="select overage"
+                  onChange={handleChangeOverage}
+                  className="form-control"
+                >
                   <option value="15">+15%</option>
                   <option value="20">+20%</option>
                   <option value="25">+25%</option>
@@ -123,18 +145,11 @@ export function Calculator({
               ? true
               : false
           }
-          onClick={
-            product.soldByThe === "box"
-              ? () => setQty(Math.round(boxesNeeded))
-              : product.soldByThe === "pc"
-              ? () => setQty(Math.round(totalPCS))
-              : () => setQty(Math.round(totalSF))
-          }
           className="btn btn-secondary mb-4"
         >
           update quantity
         </button>
       </div>
-    </div>
+    </form>
   );
 }

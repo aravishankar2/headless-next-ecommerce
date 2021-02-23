@@ -8,6 +8,7 @@ const HomeParallax = () => {
 
   return (
     <Parallax
+      className="parallax"
       bgStyle={{ backgroundPosition: "center" }}
       bgImage={image1}
       strength={200}

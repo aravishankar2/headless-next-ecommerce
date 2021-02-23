@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
 import { useRouter } from "next/router";
 import { FaShoppingCart, FaSearch, FaTimes } from "react-icons/fa";
-import { FilterContext } from "../../context/filterbar.context.tsx";
-import { ParamsContext } from "../../context/params.context.tsx";
+import { FilterContext } from "../../../context/filterbar.context.tsx";
+import { ParamsContext } from "../../../context/params.context.tsx";
 import NavLogo from "./NavLogo.component";
 import styles from "./Nav.module.scss";
-import Cheeseburger from "./Cheeseburger.component";
+import Cheeseburger from "../Cheeseburger.component";
 const Nav = () => {
   const [open, setOpen] = useState(false);
   const { state, dispatch } = useContext(FilterContext);

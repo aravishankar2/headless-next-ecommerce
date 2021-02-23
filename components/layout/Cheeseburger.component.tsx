@@ -1,7 +1,7 @@
-import styles from "./Nav.module.scss";
+import styles from "./Nav/Nav.module.scss";
 import HamburgerMenu from "react-hamburger-menu";
 import { FilterContext } from "../../context/filterbar.context";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 interface Props {
   open: boolean;

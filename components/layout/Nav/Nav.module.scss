@@ -1,4 +1,4 @@
-@import "../../variables";
+@import "../../../variables";
 
 .nav {
   padding: 1rem;
@@ -36,15 +36,22 @@
 }
 
 @media screen and (max-width: 960px) {
+  .cheeseburger {
+    display: block !important;
+    position: absolute;
+    right: 0;
+    div {
+      &:hover {
+        span {
+          background: $gold !important;
+        }
+      }
+    }
+  }
   .nav {
     position: relative;
   }
 
-  .searchcarticons {
-    position: absolute;
-    right: 0;
-    margin-right: 3rem;
-  }
   .navlinks {
     li {
       padding: 1rem;
@@ -71,25 +78,23 @@
     border-bottom: 1px solid $gold;
     transition: all 0.5s ease-in-out;
   }
-  .cheeseburger {
-    display: block !important;
+
+  .searchcarticons {
     position: absolute;
     right: 0;
-    div {
-      &:hover {
-        span {
-          background: $gold !important;
-        }
-      }
-    }
+    margin-right: 3rem;
   }
 }
 
 @media screen and (max-width: 575px) {
   .nav {
-    display: flex !important;
-    flex-direction: column !important;
+    display: flex;
+    flex-direction: column;
   }
+  .navlinks {
+    top: 115px;
+  }
+
   .searchcarticons {
     position: relative;
     margin-right: 0;
@@ -97,9 +102,5 @@
     width: 100%;
     display: flex;
     justify-content: space-evenly;
-  }
-
-  .navlinks {
-    top: 115px;
   }
 }

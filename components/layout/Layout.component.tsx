@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import Nav from "./Nav.component";
+import Nav from "./Nav/Nav.component";
 import Head from "next/head";
 import Search from "./SearchBar/Search.component";
 import { FilterContext } from "../../context/filterbar.context";
@@ -9,7 +9,7 @@ const Layout = (props: IProps) => {
   const { state } = useContext(FilterContext);
 
   return (
-    <div>
+    <>
       <Head>
         {/* Version 2 of Snipcart */}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
@@ -25,14 +25,14 @@ const Layout = (props: IProps) => {
         />
       </Head>
       <Nav />
-      <div>
+      <>
         <main>
           {state.searchOpened ? <Search /> : null}
           {props.children}
         </main>
-      </div>
+      </>
       <footer></footer>
-    </div>
+    </>
   );
 };
 

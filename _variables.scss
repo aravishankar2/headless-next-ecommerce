@@ -1,3 +1,39 @@
 $gold: #bea771;
 $grey: #a6a8a7;
 $black: #171717;
+
+
+
+
+/* Font */
+
+$h1: 64px;
+$h2: 52px;
+$h3: 36px;
+$h4: 28px;
+$body: 20px;
+
+/* Screen Size */
+
+$breakpoints: (
+  'phone': 400px,
+  'phone-wide': 480px,
+  'phablet': 560px,
+  'tablet-small': 640px,
+  'tablet': 768px,
+  'tablet-wide': 1024px,
+  'desktop': 1248px,
+  'desktop-wide': 1440px,
+);
+
+@mixin screen($width, $type: min) {
+  @if map_has_key($breakpoints, $width) {
+    $width: map_get($breakpoints, $width);
+    @if $type == max {
+      $width: $width - 1px;
+    }
+    @media only screen and (#{$type}-width: $width) {
+      @content;
+    }
+  }
+}

@@ -1,9 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
+import styles from "./product-page.module.scss";
 import { GET_PRODUCT } from "../../../apollo/queries/product";
 import HandleImage from "../../../components/product/ImageSlider.component.jsx";
 import { Calculator } from "../../../components/product/Calculator.component.tsx";
 import { InfoModal } from "../../../components/product/InfoModal.component.tsx";
-import { AiFillTool, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { FrostProofModal } from "../../../components/product/FrostProofModal.component.tsx";
+import { OrderSampleModal } from "../../../components/product/OrderSampleModal.component.tsx";
+import { AiFillTool } from "react-icons/ai";
 import { FaShoppingCart, FaSnowflake } from "react-icons/fa";
 import { client } from "../../../contentful.client";
 import { useRouter } from "next/router";
@@ -17,7 +20,9 @@ export default function Product({ data: { product }, loading }) {
   const [selected, setSelected] = useState(router.query.id);
   const [qty, setQty] = useState(1);
   const [options, setOptions] = useState([]);
-  const [modalShow, setModalShow] = useState(false);
+  const [infoModalShow, setInfoModalShow] = useState(false);
+  const [frostProofModalShow, setFrostProofModalShow] = useState(false);
+  const [sampleModal, setSampleModal] = useState(false);
   const { dispatch } = useContext(FilterContext);
 
   useEffect(() => {
@@ -43,13 +48,6 @@ export default function Product({ data: { product }, loading }) {
       }))();
   }, [router.query.id]);
 
-  // This gets the cart items from Snipcart, not sure if the rates api is worth it just yet
-
-  // useEffect(() => {
-  // var items = Snipcart.api.items.all();
-  // console.log(items)
-  // }, [modalShow]);
-
   let {
     productImage,
     name,
@@ -71,13 +69,13 @@ export default function Product({ data: { product }, loading }) {
         openGraph={{
           url: `https://flamboyant-mcclintock-010ddc.netlify.app/shop/product/${router.query.id}`,
           title: name,
-          locale: 'en_US',
+          locale: "en_US",
           images: [
             {
               url: productImage[0].url,
               width: 650,
               height: 650,
-              alt: 'product-image',
+              alt: "product-image",
             },
           ],
         }}
@@ -95,11 +93,14 @@ export default function Product({ data: { product }, loading }) {
           <div className="col-md">
             {/* Product Name */}
             <div className="d-flex justify-content-between align-items-start">
-              <h2 className="product-page-name">{name}</h2>
+              <h2 className={styles.productpagename}>{name}</h2>
               {/* Frost Proof */}
               <span>
                 {frostProof ? (
-                  <button className="btn d-flex frost-proof-icon">
+                  <button
+                    className="btn d-flex frost-proof-icon"
+                    onClick={() => setFrostProofModalShow(true)}
+                  >
                     <FaSnowflake />
                   </button>
                 ) : null}
@@ -126,15 +127,19 @@ export default function Product({ data: { product }, loading }) {
               <div className="d-flex flex-column justify-content-end mb-3">
                 <button
                   className="btn btn-secondary"
-                  onClick={() => setModalShow(true)}
+                  onClick={() => setInfoModalShow(true)}
                 >
                   view specs <AiFillTool />
                 </button>
               </div>
-
+              <FrostProofModal
+                show={frostProofModalShow}
+                onHide={setFrostProofModalShow}
+              />
+              <OrderSampleModal show={sampleModal} onHide={setSampleModal} />
               <InfoModal
-                show={modalShow}
-                onHide={setModalShow}
+                show={infoModalShow}
+                onHide={setInfoModalShow}
                 product={product}
                 pricePerBox={
                   soldByThe === "box"
@@ -178,23 +183,22 @@ export default function Product({ data: { product }, loading }) {
             />
 
             <div className="mt-4 d-flex justify-content-between">
-              <button className=" btn btn-secondary">order a sample</button>
-              <div className=" d-flex border justify-content-between align-items-center p-0">
-                <button
-                  className="btn mr-0 ml-0"
-                  onClick={() => setQty(qty - 1)}
-                >
-                  <AiOutlineMinus />
-                </button>
-                {qty}
-                <button
-                  className="btn ml-0 mr-0"
-                  onClick={() => setQty(qty + 1)}
-                >
-                  <AiOutlinePlus />
-                </button>
+              <button
+                className=" btn btn-secondary"
+                onClick={() => setSampleModal(true)}
+              >
+                order a sample
+              </button>
+              <div className="d-flex justify-content-center align-items-center p-0">
+                <input
+                  className="w-50 form-control"
+                  onChange={(e) => setQty(e.target.value)}
+                  type="number"
+                  value={qty}
+                  placeholder={`1 ${soldByThe}`}
+                  min="1"
+                />
               </div>
-
               <button
                 className="btn btn-secondary snipcart-add-item "
                 data-item-id={router.query.id}
@@ -203,7 +207,7 @@ export default function Product({ data: { product }, loading }) {
                 data-item-description={`sold by the ${product.soldByThe}`}
                 data-item-url="/"
                 data-item-price={product.price}
-                data-item-quantity={qty}
+                data-item-quantity={qty ? qty : 1}
               >
                 add to cart <FaShoppingCart />
               </button>
